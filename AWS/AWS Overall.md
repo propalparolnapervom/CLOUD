@@ -2,7 +2,7 @@
 
 ## USEFULL LINKS
 
-(AWS Udemy Course)[https://www.udemy.com/aws-certified-solutions-architect-associate/]
+[AWS Udemy Course](https://www.udemy.com/aws-certified-solutions-architect-associate/)
 
 
 
