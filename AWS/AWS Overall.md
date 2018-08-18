@@ -62,6 +62,97 @@ Cloud service providers promises vendors that the cloud will be flexible to use 
 
 
 
+## DOMAINS IN WHICH AWS OFFER SERVICES
+
+### Compute
+
+It is used to process data on the cloud by making use of powerful processors which serve multiple instances at a time.
+
+**EC2**
+
+It is a web service which provides re-sizable compute capacity in the cloud. It is designed to make the web scale computing easier for developers. 
+
+**Elastic Beanstalk**
+
+Lets you quickly deploy and manage applications in AWS without worrying about the underlying infrastructure. 
+
+**Elastic Load Balancing**
+
+ELB automatically manages the workload on your instances and distributes them to other instances in case of an instance failure.
+
+**Lambda**
+
+Is used to execute backend code without worrying about the underlying architecture, you just upload the code and it runs, it’s that simple! 
+
+
+
+
+
+### Storage and Content Delivery
+
+The storage as the name suggests, is used to store data in the cloud, this data can be stored anywhere but content delivery on the other hand is used to cache data nearer to the user so as to provide low latency.
+
+**S3 **
+
+S3 stands for simple storage service, it is used for storing data in the form of objects in the AWS Cloud.
+
+**CloudFront**
+
+Is a Content Delivery Network (CDN) which is used to cache data to an edge location which reduces latency.
+
+**Glacier**
+
+Glacier is an archiving service offered by Amazon, which offers low cost data archiving.
+
+**Snowball**
+
+It offers physical transfer of data between user’s location and AWS data centers, the device which is used to transfer the data is called Snowball.
+
+
+
+
+
+### Database
+
+The database domain is used to provide reliable relational and non relational database instances managed by AWS.
+
+**RDS**
+
+Amazon RDS is a RDBMS which does routine database tasks in 6 familiar databases like:
+  - Amazon Aurora
+  - MySQL
+  - MariaDB
+  - Oracle
+  - MS SQL
+  - PostgreSQL
+
+**DynamoDB**
+
+It is a fully managed No-SQL database service. It is known for extremely low latencies and scalability.
+
+
+### Networking
+
+It includes services which provide a variety of networking features such as security, faster access etc.
+
+
+
+### Management Tools
+
+It includes services which can be used to manage and monitor your AWS instances.
+
+
+
+### Security and Identity
+
+It includes services for user authentication or limiting access to a certain set of audience on your AWS resources.
+
+
+
+### Application Services
+
+It includes simple services like notifications, emailing and queuing.
+
 
 
 
