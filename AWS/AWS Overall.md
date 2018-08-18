@@ -92,7 +92,7 @@ Is used to execute backend code without worrying about the underlying architectu
 
 The storage as the name suggests, is used to store data in the cloud, this data can be stored anywhere but content delivery on the other hand is used to cache data nearer to the user so as to provide low latency.
 
-**S3 **
+**S3**
 
 S3 stands for simple storage service, it is used for storing data in the form of objects in the AWS Cloud.
 
