@@ -109,7 +109,7 @@ Glacier is an archiving service offered by Amazon, which offers low cost data ar
 It offers physical transfer of data between user’s location and AWS data centers, the device which is used to transfer the data is called Snowball.
 
 
-
+_______________________________________
 
 
 ### Database
@@ -131,7 +131,7 @@ Amazon RDS is a RDBMS which does routine database tasks in 6 familiar databases 
 It is a fully managed No-SQL database service. It is known for extremely low latencies and scalability.
 
 
-
+_______________________________________
 
 ### Networking
 
@@ -151,7 +151,7 @@ Route 53 is a highly scalable and highly available Domain Name System by Amazon 
 
 It helps you establish a private connection between your premises and AWS, therefore giving better network performance and throughput than an Internet based connection.
 
-
+_______________________________________
 
 ### Management Tools
 
@@ -185,7 +185,7 @@ It is a configuration management tool that helps configure and operate applicati
 Trusted Advisor is a customized cloud monitoring tool, that analyzes your AWS environment and gives insights on the expense, performance improvement, security gaps and reliability.
 
 
-
+_______________________________________
 
 
 ### Security and Identity
@@ -203,7 +203,7 @@ It is an AWS service that helps you control access to your AWS resources for you
 It is a managed service that helps you create and control encryption keys which is used to encrypt your data, and uses Hardware Security Modules to protect the security of your keys.
 
 
-
+_______________________________________
 
 
 ### Application Services
