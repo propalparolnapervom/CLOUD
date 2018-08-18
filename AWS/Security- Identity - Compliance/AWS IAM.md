@@ -1,4 +1,10 @@
-# AWS IAM
+# AWS IDENTITY ACCESS MANAGEMENT (IAM)
+
+## OVERALL
+
+IAM allows you to manage users and their access to the AWS console.
+
+
 
 
 
