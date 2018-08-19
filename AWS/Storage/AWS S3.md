@@ -53,7 +53,9 @@ Object consist of
     - bulk: restored in 5-12 hours
 
 
+## VERSIONING
 
+Once you've enable versioning for bucket, you can't turn off it, only suspend.
 
 
 
