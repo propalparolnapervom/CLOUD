@@ -89,11 +89,21 @@ To copy all existing files from original bucket use AWS CLI.
     - Customer-Provided keys - **SSE-C**
 
 
+## S3 TRANSFER ACCELERATION
+
+[S3 Transfer Acceleration Docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
+
+**S3 Transfer Acceleration** utilities the CloudFront Edge Network to accelerate your uploads to S3.
+
+Instead of uploading directly to your S3 bucket, you can use distinct URL to uload directly to an edge location which will then transfer that file to S3.
+
+You will get a distinct URL to upload to:  [<your_bucket_name>.s3-accelerate.amazonaws.com](https://<your_bucket_name>.s3-accelerate.amazonaws.com)
 
 
 
+## S3 STATIC WEBSITE HOSTING
 
-
+Address looks like: [http://<your_bucket_name>.s3-website.eu-central-1.amazonaws.com](http://<your_bucket_name>.s3-website.eu-central-1.amazonaws.com)
 
 
 
