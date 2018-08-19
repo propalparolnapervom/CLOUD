@@ -58,13 +58,11 @@ Object consist of
 Once you've enable versioning for bucket, you can't turn off it, only suspend.
 
 
-## REPLICATION
+## CROSS-REGION REPLICATION
 
 Creation of replication bucket allows to get only new file added to the original bucket.
 
-To copy all existing files from original bucket:
-
-  - 1) Install [AWS Command Line Interface (CLI)](https://aws.amazon.com/cli/)
+To copy all existing files from original bucket use AWS CLI.
 
 
 
