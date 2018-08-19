@@ -23,13 +23,13 @@ It has simple web services interface to store and retrieve any amount of data fr
 
 
 
-## Data consistency model
+## DATA CONSISTENCY MODEL
 
   - Read after Write consistency for PUTS of new object (you initially upload your file - you can see it in milliseconds)
   - Eventual Consistency for overwrite PUTS and DELETES (if you change already uploaded file, it can take some time to see changes - as files can be spread among several AZ it can take some time to change all of them)
 
 
-## Key-value store
+## KEY-VALUE STORE
 
 Object consist of
   
@@ -58,7 +58,13 @@ Object consist of
 Once you've enable versioning for bucket, you can't turn off it, only suspend.
 
 
+## REPLICATION
 
+Creation of replication bucket allows to get only new file added to the original bucket.
+
+To copy all existing files from original bucket:
+
+  - 1) Install [AWS Command Line Interface (CLI)](https://aws.amazon.com/cli/)
 
 
 
