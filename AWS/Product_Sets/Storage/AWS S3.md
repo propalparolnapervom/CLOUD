@@ -65,6 +65,28 @@ Creation of replication bucket allows to get only new file added to the original
 To copy all existing files from original bucket use AWS CLI.
 
 
+## SECURITY
+
+### MANAGING ACCESS
+
+[Access Control](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+  
+  - Using Bucket Policies and User Policies
+  - Managing Access with ACLs
+  
+### ENCRYPTION
+
+[Protecting Data using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html)
+
+- During transition data from you to bucket:
+  - SSL/TLS
+  
+- When data already in the bucket:
+  - Client side encryption
+  - Server side encryption
+    - S3 Managed Keys - **SSE-S3**
+    - AWS Key Management Services - **SSE-KMS**
+    - Customer-Provided keys - **SSE-C**
 
 
 
