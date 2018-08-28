@@ -22,6 +22,12 @@ ssh ec2-user@<public_ip> -i <you_private_key.pem>
 ### WINDOWS
 
 
+### PUBLIC DNS
+
+An example of the EC2 instance public DNS:
+
+[http://ec2-52-59-237-102.eu-central-1.compute.amazonaws.com](http://ec2-52-59-237-102.eu-central-1.compute.amazonaws.com)
+
 
 ## EC2 PRICING
 
