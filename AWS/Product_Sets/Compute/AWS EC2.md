@@ -9,6 +9,20 @@
 
 Think of **EC2** as Virtual Machine in the cloud, and **EBS** as its Virtual Disk.
 
+**Security Group** - think of it as Virtual Firewall.
+
+## CONNECT
+
+### LINUX
+
+```
+ssh ec2-user@<public_ip> -i <you_private_key.pem>
+```
+
+### WINDOWS
+
+
+
 ## EC2 PRICING
 
 **1) On-Demand**
