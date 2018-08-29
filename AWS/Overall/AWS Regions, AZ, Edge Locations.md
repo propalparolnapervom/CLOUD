@@ -35,6 +35,7 @@ ____________________________________________
 The following table lists the regions provided by an AWS account. You can't describe or access additional regions from an AWS account, such as AWS GovCloud (US) or China (Beijing).
 
 Code	      Name
+
 us-east-1     US East (N. Virginia)
 
 us-east-2     US East (Ohio)
