@@ -1,4 +1,4 @@
-# AWS EC2: EBS
+# AWS EC2: EBS (SNAPSHOTS, IMAGES)
 
 
 ## OVERALL
@@ -7,6 +7,9 @@
 
 Think of **EC2** as Virtual Machine in the cloud, and **EBS** as its Virtual Disk.
 
+**Snapshots** usually used for backups.
+
+**Images** usually used to boot EC2 images from it.
 
 ## EBS VOLUMES TYPES
 
@@ -21,7 +24,28 @@ Think of **EC2** as Virtual Machine in the cloud, and **EBS** as its Virtual Dis
 
 
 
+## EC2, EBS AND AZ
 
+
+EC2 instance and EBS has to be in the same AZ (think about computer architecture: you don't want to have you HDD in 50 miles as latency will be way to big).
+
+To move EBS from one AZ to another:
+  - create a snapshot of the EBS, which is in the old AZ;
+  - create a new EBS from the snapshot, in necessary (new) AZ;
+  
+To move EC2 instance from one Region to another:
+  - create a snapshot of the EBS, currently used by the EC2 instance;
+  - copy snapshot to a new Region;
+  - create an image of the copied snapshot;
+  - boot it as new EC2 instance;
+  
+  
+
+## EBS MODIFYING
+
+You can modify (change) any storage, except Standart Magnetic one.
+
+It can be done without downtime (though some performance issues might appear).
 
 
 
