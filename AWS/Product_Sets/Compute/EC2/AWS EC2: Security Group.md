@@ -8,11 +8,16 @@
 
 ___________________________
 
+
 By default:
   - All INBOUND traffic is denied;
   - All OUTBOUND traffic is allowed.
-  
-You can't deny any INBOUND traffic in the Security Groups, you can only allow it.
+ 
+ 
+___________________________
+
+
+You can't deny any specific INBOUND traffic in the Security Groups (as it's all denied), you can only allow this specific trafic.
 
   
 ___________________________
