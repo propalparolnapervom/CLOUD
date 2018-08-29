@@ -1,4 +1,4 @@
-# AWS IDENTITIES
+# AWS IDENTITIES (Users, Groups, and Roles)
 
 ## OVERALL
 
