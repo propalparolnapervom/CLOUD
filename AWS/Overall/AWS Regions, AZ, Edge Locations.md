@@ -18,6 +18,24 @@ Amazon EC2 provides you the ability to place resources, such as instances, and d
 
 Resources aren't replicated across regions unless you do so specifically.
 
+
+____________________________________________
+
+
+So,
+
+An **Amazon AWS region** is a physical location spread across globe to host your data to reduce latency. In each region there will be at least 2 AZ for fault tolerance.
+
+An **Availability Zone (AZ)** is a combination of one or more data centers in a given region. These datacenters need not to be separated by multiple kilometers physically but by meters with in a physical compound which are completely isolated from each other failure such as power, network in a given AZ.  It is a logical grouping of data centers in a given region for service high availability. These AZs in a region are connected with direct Fiber optic links which have capacity of around 25Tbps bandwidth and a latency of 2ms to 1ms. 
+
+A **datacenter** is a location where actual physical data resides. A data center typically have 50000 to 80000 physical servers. A single or couple of data centers are clubbed in to one AZ. Its really hard to get how many datacenters Amazon operates. 
+
+An **edge location** is where end users access services located at AWS. They are located in most of the major cities around the world and are specifically used by *CloudFront (CDN)* to distribute content to end user to reduce latency. It is like frontend for the service we access which are located in AWS cloud. Below are some of the Edge locations as of this writing.
+
+____________________________________________
+
+To deliver content to end users with lower latency, *Amazon CloudFront* uses a global network of 134 Points of Presence (123 **Edge Locations** and 11 **Regional Edge Caches**) in 61 cities across 28 countries.
+
 ____________________________________________
 
 Each region is completely independent. 
