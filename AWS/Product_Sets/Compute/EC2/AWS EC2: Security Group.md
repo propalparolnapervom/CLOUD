@@ -1,8 +1,10 @@
-# AWS EC2: Security Group
+# AWS EC2: SECURITY GROUP
+
+
 
 ## OVERALL
 
-**Security Group** - think of it as Virtual Firewall.
+**Security Group** - think of it as Virtual Firewall. It is controlling traffic to your EC2 instances.
 
 
 
