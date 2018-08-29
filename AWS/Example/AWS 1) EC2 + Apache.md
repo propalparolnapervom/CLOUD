@@ -40,6 +40,11 @@ Start Apache
 service httpd start
 ```
 
+Make sure it starts every time automatically
+```
+chkconfig httpd on
+```
+
 **2. Make necessary dirs**
 
 If not exists yet ...
