@@ -11,6 +11,9 @@ Think of **EC2** as Virtual Machine in the cloud, and **EBS** as its Virtual Dis
 
 **Images** usually used to boot EC2 images from it.
 
+
+
+
 ## EBS VOLUMES TYPES
 
 - **SSD**:
@@ -29,9 +32,10 @@ Think of **EC2** as Virtual Machine in the cloud, and **EBS** as its Virtual Dis
 
 EC2 instance and EBS has to be in the same AZ (think about computer architecture: you don't want to have you HDD in 50 miles as latency will be way to big).
 
-To move EBS from one AZ to another:
-  - create a snapshot of the EBS, which is in the old AZ;
-  - create a new EBS from the snapshot, in necessary (new) AZ;
+To move EBS from one AZ/Region to another:
+  - create a snapshot/image of the EBS, which is in the old AZ/Region;
+  - copy it to the new AZ/Region;
+  - create a new EBS from the just copied snapshot/image;
   
 To move EC2 instance from one Region to another:
   - create a snapshot of the EBS, currently used by the EC2 instance;
@@ -43,21 +47,64 @@ To move EC2 instance from one Region to another:
 
 ## EBS MODIFYING
 
-You can modify (change) any storage, except Standart Magnetic one.
+You can modify (change) attributes of storage:
+  - size
+  - storage type (except for Standart Magnetic)
 
 It can be done without downtime (though some performance issues might appear).
 
 
+## SNAPSHOTS
+
+**Snapshot** is point in time (copy) of Volume.
+
+Snapshots exist on S3. You don't see it, but it is so.
+
+Snashots are incremental: only the blocks that have changed since your last snapshot are moved to S3.
+
+If you do want to make a snapshot for root Volume, you should prior stop the instance (hovewer, technically it can be done while instance is running).
+
+Snapshots of encrypted volumes are encrypted automatically. Volumes restored from encrypted snapshots are also encrypted automatically.
+
+
+
+## RAIDS
+
+If you reached volume IO limit and you still need more, you can add more Volumes and put them in the Raids
+
+
+**RAID** - Redundant Array of Independent Disks.
+  - **RAID 0** - Stripped, No Redundency, Good Performance;     **<== Typical for AWS**
+  - **RAID 1** - Mirrored, Redundency;
+  - **RAID 5** - Good for reads, Bad for writes;     **<== AWS doesn't recommend ever putting RAID 5 on EBS**
+  - **RAID 10** - 1+0 - Stripped & Mirrored, Good Redundency, Good Performance.     **<== Typical for AWS**
 
 
 
 
+## RAIDS AND SNAPSHOT
+
+**Problem**
+
+A snapshot excludes data held in the cache by APP and OS.
+
+It doesn't matter on a single Volume, but using multiple Volumes in a RAID array, this could be a problem due to interdependencies of the array. 
+
+**Solution**
+
+Take an APP consistent snapshot.
 
 
+**Taking APP consistent snapshot**
 
-
-
-
+What we need to do:
+  - Stop the APP from writing to the disk
+  - Flush all caches to the disk
+  
+How we can do it - use one of the following:
+  - Freeze the FS;
+  - Unmount the RAID array;
+  - Shutting down the associated EC2 instance and take a snapshot   <== the easiest way, that most people do
 
 
 
