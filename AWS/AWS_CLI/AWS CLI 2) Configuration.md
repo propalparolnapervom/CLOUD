@@ -40,8 +40,8 @@ cat ~/.aws/config
 cat ~/.aws/credentials     
 
       [default]
-      aws_access_key_id = LAAJK4YHMEPWAFKLQ
-      aws_secret_access_key = CHgcQ77jVLhvFDNWhHkhjwGhgdy+lXjCJK2wAX7N
+      aws_access_key_id = LA...
+      aws_secret_access_key = CHgc...
 ```
 
 
