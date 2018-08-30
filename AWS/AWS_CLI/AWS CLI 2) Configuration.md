@@ -10,6 +10,7 @@ For general use, the `aws configure` command is the fastest way to set up your A
 [Region Names & Codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)
 
 ```
+sudo su
 aws configure
 
       AWS Access Key ID [None]: 
@@ -19,7 +20,29 @@ aws configure
 ```
 
 
+## CREDENTIALS STORAGE
 
+Provided during AWS CLI configuration credentials are stored LOCALLY in the home of the config user (that's why ROLES are in use):
+```
+ls -la ~/.aws
+
+      -rw------- 1 root root   46 Aug 30 11:59 config
+      -rw------- 1 root root  116 Aug 30 11:59 credentials
+ 
+ 
+cat ~/.aws/config
+
+      [default]
+      output = json
+      region = eu-central-1
+      
+      
+cat ~/.aws/credentials     
+
+      [default]
+      aws_access_key_id = LAAJK4YHMEPWAFKLQ
+      aws_secret_access_key = CHgcQ77jVLhvFDNWhHkhjwGhgdy+lXjCJK2wAX7N
+```
 
 
 
