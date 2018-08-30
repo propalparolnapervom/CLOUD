@@ -1,4 +1,4 @@
-# AWS EC2: EBS (SNAPSHOTS, IMAGES)
+# AWS EC2: EBS (SNAPSHOTS, IMAGES, RAIDS)
 
 
 ## OVERALL
@@ -66,6 +66,7 @@ If you do want to make a snapshot for root Volume, you should prior stop the ins
 
 Snapshots of encrypted volumes are encrypted automatically. Volumes restored from encrypted snapshots are also encrypted automatically.
 
+You can share snapshots, but only if they are not encrypted: encryption has strong connection with AWS accounts.
 
 
 ## RAIDS
@@ -105,6 +106,60 @@ How we can do it - use one of the following:
   - Freeze the FS;
   - Unmount the RAID array;
   - Shutting down the associated EC2 instance and take a snapshot   <== the easiest way, that most people do
+
+
+
+
+## ROOT DEVICE TYPE
+
+
+Storage for the root device (Root Device Volume):
+  - **Instance Store (EPHEMERAL STORAGE)**
+    - you CAN'T stop the Instance;
+      - if underlaying host fails, you will lose your data (That's why it called EPHEMERAL STORAGE);
+    - you CAN'T detach the Volume;
+    - you CAN reboot, no data lost;
+    - root volume will be deleted on termination by default, you CAN'T tell AWS to keep it;
+  - **EBS Backed Volumes**
+    - you CAN stop the Instance;
+      - if underlaying host stops, you will not lose your data;
+    - you CAN detach the Volume (and potentially to attach it another Instance);
+    - you CAN reboot, no data lost;
+    - root volume will be deleted on termination by default, you CAN tell AWS to keep it;
+
+__________________________
+
+
+**EBS Backed Volumes** appeared after **Instance Storage**, as AWS was critisized for inconsistance of data;
+__________________________
+
+**Instance Store Volume**
+
+The *root device for the Instance* launched from the AMI is an *Instance Store Volume* created from a *template stored in Amazon S3*.
+
+**EBS Volumes**
+
+The *root device for the Instance* launched from the AMI is an *Amazon EBS volume* created from an *Amazon EBS snapshot*.
+
+For this difference provision of the *EBS Volumes* is faster.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
