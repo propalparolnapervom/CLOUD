@@ -1,14 +1,32 @@
 # AWS CLI COMMANDS
 
-**Version**
-
-```
-aws --version
-```
 
 ## DOCS
 
 [Command Refference](https://docs.aws.amazon.com/cli/latest/index.html)
+
+
+
+## OVERALL
+
+**Version**
+```
+aws --version
+```
+
+**Help**
+```
+   #aws <service> help
+   
+aws s3 help
+```
+
+
+## EC2
+
+[EC2 Command Refference](https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html)
+
+
 
 
 ## S3
