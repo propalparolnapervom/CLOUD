@@ -1,5 +1,11 @@
 # AWS CLI COMMANDS
 
+**Version**
+
+```
+aws --version
+```
+
 ## DOCS
 
 [Command Refference](https://docs.aws.amazon.com/cli/latest/index.html)
