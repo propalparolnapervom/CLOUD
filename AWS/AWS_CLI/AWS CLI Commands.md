@@ -26,8 +26,15 @@ aws s3 help
 
 [EC2 Command Refference](https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html)
 
+**Describe EC2 instances**
+```
+aws ec2 describe-instances
+```
 
-
+**Terminate EC2 instances**
+```
+aws ec2 terminate-instances --instance-ids i03-002rower235
+```
 
 ## S3
 
