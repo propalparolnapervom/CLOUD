@@ -1,6 +1,8 @@
 # AWS EC2: ROLES
 
-## OVEROLL
+[IAM Roles](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html?icmpid=docs_ec2_console)
+
+## OVERALL
 
 Storage of AWS credentials locally on the EC2 instance can be copromised. They have to be updated then. What if you have 1000 EC2 instances - do you want to updated local credentials on each of those servers? That's where Roles can help.
 
