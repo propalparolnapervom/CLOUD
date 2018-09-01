@@ -65,9 +65,15 @@ aws s3 mb s3://xbs-web-bash --region eu-central-1
 > No "_" is allowed in the name of the S3 bucket.
 
 
-**Delete**
+**Delete (empty bucket)**
+```
+aws s3 rb s3://xbswebbash
+```
 
-
+**Delete (object in the bucket)**
+```
+aws s3 rm s3://mybucket/test2.txt
+```
 
 **Copy** 
 
