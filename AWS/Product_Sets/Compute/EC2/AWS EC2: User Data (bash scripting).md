@@ -1,9 +1,28 @@
 # AWS EC2: USER DATA (BASH SCRIPTING)
 
-**Bash sript** - list of AWS command lines that will be run during EC2 instance startup.
+[User Data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
 
 
-## EXAMPLE OF THE STEPS TO AUTOMATE USER DATA ADDING TO EC2 (via bash scripting)
+## OVERALL
+
+You can pass two types of user data to Amazon EC2: 
+  - shell scripts
+  - cloud-init directives.
+  
+You can also pass this data into the launch wizard as:
+  - a plain text;
+  - a file (this is useful for launching instances using the command line tools);
+  - as base64-encoded text (for API calls).
+
+If you are interested in more complex automation scenarios, consider using **AWS CloudFormation** and **AWS OpsWorks**. 
+
+**Shell sript** - list of AWS command lines that will be run during EC2 instance startup.
+
+Scripts entered as user data are executed as the **root** user.
+
+
+
+## SHELL SCRIPT: EXAMPLE OF THE STEPS TO AUTOMATE USER DATA
 
 Make some steps to automate a process of WebServer creation.
 
@@ -54,7 +73,7 @@ yum install httpd -y
 service httpd start
 chkconfig httpd on 
 
-aws s3 cp //xbs-web-bash/index.html /var/www/html
+aws s3 cp s3://xbs-web-bash/index.html /var/www/html
 ```
   
   
@@ -64,6 +83,12 @@ aws s3 cp //xbs-web-bash/index.html /var/www/html
 Make a verification by entering public IP addres in a browser just after EC2 instance is up and running.
 
 
+**6. Debug**
+
+Check the output for errors of steps above.
+```
+cat /var/log/cloud-init-output.log
+```
 
 
 
