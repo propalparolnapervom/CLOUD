@@ -36,11 +36,16 @@ aws ec2 describe-instances
 aws ec2 terminate-instances --instance-ids i03-002rower235
 ```
 
+
+
+
 ## S3
 
 [S3 Command Refference](https://docs.aws.amazon.com/cli/latest/reference/s3/index.html)
 
 ### BUCKETS
+
+**List**
 
 List buckets
 ```
@@ -49,6 +54,22 @@ aws s3 ls
       2018-08-19 10:29:22 xburser
       2018-08-19 10:28:33 xburserlondon
 ```
+
+**Create**
+
+Create a `xbs-web-bash` S3 bucket (in the same Region `eu-central-1` where EC2 instance will be created).
+```
+aws s3 mb s3://xbs-web-bash --region eu-central-1
+```
+
+> No "_" is allowed in the name of the S3 bucket.
+
+
+**Delete**
+
+
+
+**Copy** 
 
 Copy bucket `xburser` to bucket `xburser london`
 ```
