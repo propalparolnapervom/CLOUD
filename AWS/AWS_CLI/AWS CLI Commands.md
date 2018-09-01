@@ -90,14 +90,14 @@ aws s3 cp --recursive s3://xburser s3://xburserlondon
 
 Place HTML-page to `xbs-web-bash` S3 bucket.
 ```
-aws s3 cp D:\Khlam\html\index_xburser.html s3://xbs-web-bash
+aws s3 cp D:\Khlam\html\index.html s3://xbs-web-bash
 ```
 
 **Bucket to Local PC**
 
 Place HTML-page to `xbs-web-bash` S3 bucket.
 ```
-aws s3 cp s3://xbs-web-bash/index_xburser.html D:\Khlam\html
+aws s3 cp s3://xbs-web-bash/index.html D:\Khlam\html
 ```
 
 
