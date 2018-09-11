@@ -62,7 +62,9 @@ Create an IAM role `S3-Admin-Access` for EC2, that will allow the full admin acc
 **4. Create EC2 instance**
 
 Create an EC2 instance with:
+
   4.1. Just created Role.
+  
   4.2. Advanced Details fullfilled with necessary `User Data` area (`As text` radiobutton is selected):
   
 ```
