@@ -1,0 +1,34 @@
+# AWS EC2: PLACEMENT GROUPS
+
+## OVERALL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
