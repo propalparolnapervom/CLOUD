@@ -76,13 +76,10 @@ Also:
 
 How is Lambda priced?
   1) **Number of requests**:
-  
     - First million requests are free. $0.20 per 1 million requests thereafter.
     
   2) **Duration**:
-  
     - Duration is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB-second used.
-    
     - there's a limit of 5 minutes: your function CAN'T been executed for 5 mins. If this is the case, you need to divide your function to smaller ones to get one function run another one.
 
 
