@@ -48,7 +48,7 @@ Hit `Create` button.
 
 Wait some small time until DNS will be updated.
 
-Try to visit just created domain: [xburser.com](xburser.com)
+Try to visit just created domain: [xburser.com](http://xburser.com)
 
 
 
