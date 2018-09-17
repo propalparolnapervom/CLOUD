@@ -21,9 +21,7 @@ Make a domain registration for `xburser.com`.
 
   2. Make it Static-Website.
 
-  3. Put necessary '*.html' files to the bucket.
 
-  4. Make them public.
 
 
 
@@ -158,6 +156,11 @@ function myFunction() {
 
 </html>
 ```
+
+Put necessary `index.html` and `error.html` files to the S3 bucket.
+
+Make them public.
+
 
 
 
