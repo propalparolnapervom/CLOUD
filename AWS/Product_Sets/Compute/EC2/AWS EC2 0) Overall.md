@@ -33,6 +33,8 @@ An example of the EC2 instance public DNS:
 
 **1) On-Demand**
 
+> You pay by the second/hour.
+
 You pay for compute capacity by per hour or per second depending on which instances you run. You can increase or decrease your compute capacity depending on the demands of your application and only pay the specified per hourly rates for the instance you use.
 
 Recommended for:
@@ -43,6 +45,13 @@ Recommended for:
 
 **2) Spot Instances**
 
+> You set a bit price. 
+
+> If spot price equels that price, your instances will be provisioned.
+
+> If spot price is over that price, your instances will be terminated. If that happens withing 1 hour (in 20 min, for instance), you WILL NOT be charged for that our. But if you terminate them by your own, your WILL be charged.
+
+
 Allow you to request spare Amazon EC2 computing capacity for up to 90% off the On-Demand price. 
 
 Recommended for:
@@ -52,6 +61,9 @@ Recommended for:
   - Users with urgent computing needs for large amounts of additional capacity
 
 **3) Reserved Instances**
+
+> When you reserve capacity. From 12 months till 36 months.
+
 
 Reserved Instances provide you with a significant discount (up to 75%) compared to On-Demand instance pricing. 
 
@@ -66,6 +78,8 @@ Recommended for:
   - Customers that can commit to using EC2 over a 1 or 3 year term to reduce their total computing costs
 
 **4) Dedicated Hosts**
+
+> Typically around licensing. When your regulator doesn't want you to have shared or mulitenent hardware.
 
 A Dedicated Host is a physical EC2 server dedicated for your use. 
 
