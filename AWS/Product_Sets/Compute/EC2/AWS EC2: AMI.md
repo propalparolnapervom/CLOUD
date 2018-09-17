@@ -1,0 +1,64 @@
+# AWS EC2: AMI
+
+## OVERALL
+
+**Amazon Machine Images (AMI)** are regional. 
+
+You can only launch an AMI from the region in which it is stored.
+
+However you can copy AMIs to other regions using the console, CLI, Amazon EC2 API.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
