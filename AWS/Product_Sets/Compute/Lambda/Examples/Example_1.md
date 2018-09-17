@@ -120,12 +120,44 @@ Click `Deploy` button.
 
 Click `Stages`, then `prod`, then `GET`, then hit Invoke URL link.
 
+Copy it to Clipboard.
+
+
+
 
 ## 4) PLACE NECESSARY `*.html` FILES TO S3
 
 Place to S3 bucket `*.html` files that will use Lambda to get your name.
 
-Create 
+Create an index.html.
+```
+<html>
+
+<script>
+
+function myFunction() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("my-demo").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "https://jgfo7b4gk7.execute-api.us-east-1.amazonaws.com/default/xbs_lambda_func", true);
+    xhttp.send();
+
+}
+
+</script>
+
+<body>
+<div align="center"><br><br><br><br>
+<h1>Hello <span id="my-demo">Cloud Gurus!</span></h1>
+<button onclick="myFunction()">Click me</button><br>
+</div>
+</body>
+
+</html>
+```
 
 
 
