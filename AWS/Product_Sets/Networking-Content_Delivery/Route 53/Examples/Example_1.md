@@ -19,7 +19,7 @@ Make a domain registration for `xburser.com`.
 
   2. Make it Static-Website.
 
-  3. Put necessary *.html files to the bucket.
+  3. Put necessary '*.html' files to the bucket.
 
   4. Make them public.
 
