@@ -7,8 +7,8 @@
     - Install `httpd` on both of them;
     - Put appropriate `index.html` on both of them;
     - Create ELB and verify, that it shows different `index.html` after each refresh.
-  - Prepare 1 EC2 instance in `Sydney` region:
-    - Create `xbsSydney1` EC2 instance in the `Sydney` region;
+  - Prepare 1 EC2 instance in `N.Virginia` region:
+    - Create `xbsVirginia1` EC2 instance in the `N.Virginia` region;
     - Install `httpd` on it;
     - Put appropriate `index.html` on it;
     - Create ELB and verify, that it works.
@@ -33,11 +33,11 @@ chkconfig httpd on
 echo "<html><body><h1>This is FRANKFURT1</h1></body></html>" > /var/www/html/index.html
 ```
 
-**Sydney Region**
+**N.Virginia Region**
 
-Select necessary region (`Sydney`).
+Select necessary region (`N.Virginia`).
 
-Create `xbsSydney1` EC2 instance.
+Create `xbsVirginia1` EC2 instance.
  
 Use default settings.
 
@@ -48,7 +48,7 @@ yum update -y
 yum install httpd -y
 service httpd start
 chkconfig httpd on
-echo "<html><body><h1>This is SYDNEY1</h1></body></html>" > /var/www/html/index.html
+echo "<html><body><h1>This is VIRGINIA1</h1></body></html>" > /var/www/html/index.html
 ```
 
 
@@ -61,9 +61,9 @@ Create `FrankfurtELB` ELB for just created EC2 instances, in the same region and
 Use DNS name for ELB, make sure it works for each EC2 instance after each web-page refresh.
 
 
-**Sydney Region**
+**N.Virginia Region**
 
-Create `SydneyELB` ELB for just created EC2 instance, in the same region and security group.
+Create `VirginiaELB` ELB for just created EC2 instance, in the same region and security group.
 
 Use DNS name for ELB, make sure it works.
 
