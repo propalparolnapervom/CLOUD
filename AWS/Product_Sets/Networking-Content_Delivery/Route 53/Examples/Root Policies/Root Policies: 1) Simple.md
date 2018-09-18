@@ -23,13 +23,13 @@ Hit `Create Record Set` button.
 Name: xburser.com     <== no "www" here
 Type: A - IPv4 address
 Alias: Yes radiobutton is selected
-Alias Target: select one for your ELB in nearest region.
+Alias Target: select one for your ELB in nearest region (which is "FrankfurtELB").
 Routing Policy: Simple
 ```
 
 Hit `Create` button.
 
-After some small time (minute or two), verify your DNS name [http://xburser.com](http://xburser.com).
+After some small time (minute or two), verify your DNS name [http://xburser.com](http://xburser.com) and make sure that its behaiver corresponds to one for `FrankfurtELB`.
 
 
 
