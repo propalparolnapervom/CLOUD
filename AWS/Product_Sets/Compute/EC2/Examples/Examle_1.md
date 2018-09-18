@@ -27,9 +27,9 @@ echo "<html><body><h1>This is FRANKFURT1</h1></body></html>" > /var/www/html/ind
 
 ## 2) CREATE ELB
 
-Create ELB for just created EC2 instances.
+Create `FrankfurtELB` ELB for just created EC2 instances, in the same region and security group.
 
-Make sure it works for each EC2 instance after each web-page refresh.
+Use DNS name for ELB, Make sure it works for each EC2 instance after each web-page refresh.
 
 
 
