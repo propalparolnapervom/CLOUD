@@ -2,14 +2,22 @@
 
 ## WHAT
 
-  - Create `xbsFrankfurt1` and `xbsFrankfurt2` EC2 instances;
-  - Install `httpd` on both of them;
-  - Put appropriate `index.html` on both of them;
-  - Create ELB and verify, that it shows different `index.html` after each refresh.
+  - Prepare 2 EC2 instances in `Frankfurt` region:
+    - Create `xbsFrankfurt1` and `xbsFrankfurt2` EC2 instances in the `Frankfurt` region;
+    - Install `httpd` on both of them;
+    - Put appropriate `index.html` on both of them;
+    - Create ELB and verify, that it shows different `index.html` after each refresh.
+  - Prepare 1 EC2 instance in `Sydney` region:
+    - Create `xbsSydney1` EC2 instance in the `Sydney` region;
+    - Install `httpd` on it;
+    - Put appropriate `index.html` on it;
+    - Create ELB and verify, that it works.
   
 ## 1) CREATE EC2 INSTANCES, INSTALL `httpd`, CREATE `index.html`
 
-Select necessary region.
+**Frankfurt Region**
+
+Select necessary region (`Frankfurt`).
 
 Create `xbsFrankfurt1` and `xbsFrankfurt2` EC2 instances.
  
@@ -25,11 +33,39 @@ chkconfig httpd on
 echo "<html><body><h1>This is FRANKFURT1</h1></body></html>" > /var/www/html/index.html
 ```
 
+**Sydney Region**
+
+Select necessary region (`Sydney`).
+
+Create `xbsSydney1` EC2 instance.
+ 
+Use default settings.
+
+Use following user data during creation (update it for each EC2 instance):
+```
+#!/bin/bash
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+echo "<html><body><h1>This is SYDNEY1</h1></body></html>" > /var/www/html/index.html
+```
+
+
 ## 2) CREATE ELB
+
+**Frankfurt Region**
 
 Create `FrankfurtELB` ELB for just created EC2 instances, in the same region and security group.
 
-Use DNS name for ELB, Make sure it works for each EC2 instance after each web-page refresh.
+Use DNS name for ELB, make sure it works for each EC2 instance after each web-page refresh.
+
+
+**Sydney Region**
+
+Create `SydneyELB` ELB for just created EC2 instance, in the same region and security group.
+
+Use DNS name for ELB, make sure it works.
 
 
 
