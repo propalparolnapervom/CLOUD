@@ -16,6 +16,12 @@ This is most commonly used when you have a single resource that performs a given
 
 **Weighted**: Route53 responds to queries based on Weighting that you specify in this and other record sets that have the same name and type.
 
+It lets you split your traffic based on different weights assigned.
+
+You might not see this in a few minutes, you can notice result during the whole day.
+
+> For example, you can set 10% of your traffic to go to ELB1 and other 90% - to ELB2 (they might be in different regions or in one).
+
 
 
 ## LATENCY
