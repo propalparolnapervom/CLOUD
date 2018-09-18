@@ -29,7 +29,7 @@ Routing Policy: Simple
 
 Hit `Create` button.
 
-After some small time (minute or two), verify your DNS name [http://xburser.com](http://xburser.com) and make sure that its behaiver corresponds to one for `FrankfurtELB`.
+After some time (few minutes), verify your DNS name [http://xburser.com](http://xburser.com) and make sure that its behaiver corresponds to one for `FrankfurtELB`.
 
 
 
