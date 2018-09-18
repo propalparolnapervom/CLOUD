@@ -9,6 +9,8 @@
   
 ## 1) CREATE EC2 INSTANCES, INSTALL `httpd`, CREATE `index.html`
 
+Select necessary region.
+
 Create `xbsFrankfurt1` and `xbsFrankfurt2` EC2 instances.
  
 Use default settings.
