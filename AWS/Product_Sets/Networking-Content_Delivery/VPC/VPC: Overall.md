@@ -17,7 +17,7 @@ Additionally, you can create a Hardware **Virtual Private Network (VPN)** connec
 
 
 
-![VPC](https://github.com/propalparolnapervom/OVERALL/Pictures/VPC_DIAGRAM.JPG "The VPC diagram")
+![VPC](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/VPC_DIAGRAM.JPG "The VPC diagram")
 
 
 Every Region in the world has default VPC. You get that setup when you first setup your AWS account. Amazon provided it for you automatically.
