@@ -20,18 +20,64 @@ Additionally, you can create a Hardware **Virtual Private Network (VPN)** connec
 ![VPC](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/VPC_DIAGRAM.JPG "The VPC diagram")
 
 
+
+## VPC vs REGION
+
 Every Region in the world has default VPC. You get that setup when you first setup your AWS account. Amazon provided it for you automatically.
 
+You can have multiply VPC in the Region. By default that limit is 5, but you can make it bigger by e-mailing to AWS.
+
+
+## IP and SUBNETS
+
+Each **Subnet** - different AZ.
+
+AWS allows you to use following IP ranges for subnets:
+
+  - 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+  - 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+  - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+  
+Example of the WebSite to count CIDR: [http://cidr.xyz/](http://cidr.xyz/)
+
+`/28` is mask for smalest range of IP adresses you can have in AWS.
+
+**Rout table** between subnets define which subnet can talk with which subnet.
+
+> You can have only 1 Internet Gateway for 1 VPC.
+
+
+## DEFAULT VPC vs CUSTOM VPC
+
+  - Default VPC is user friendly, allowing you to immediately deploy instances;
+  - All Subnets in default VPC have a route out to the Internet;
+  - Each EC2 instance in default VPC has both a public and private IP address;
 
 
 
+## VPC PEERING
+
+If you have several private VPC, they can connect with each other - via peering.
+
+  - allows you to connect one VPC with another via a direct network route using private IP addresses;
+  - instances behave as if they were on the same private network;
+  - you can peer VPC's with other AWS accounts as well as with other VPCs in the same account;
+  - peering is in a star configuration: i.e. 1 central VPC peers with 4 others. NO TRANSITIVE PEERING!!!
+    - You have VPC A peered to VPC B and to VPC C. So VPC A can connect with VPC B and with VPC C. In this case VPC B cannot connect with VPC C. Additional peering between them has to be established to be able to communicate.
 
 
 
+## CONCLUSION
 
-
-
-
+   - Think of VPC as a logical datacenter in AWS;
+   - Consists of:
+    - Internet Gateways (or Virtual Private Gateways);
+    - Route Tables;
+    - Network Access Control Lists;
+    - Security Groups;
+   - 1 Subnet = 1 AZ;
+   - Security Groups are **stateful**; Network Access Control Lists are **stateless** (so in first case opened port 80 for inbound automatically opens port for outpound, in second - not automatically);
+   - NO TRANSITIVE PEERING
 
 
 
