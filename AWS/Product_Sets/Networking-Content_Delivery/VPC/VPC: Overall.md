@@ -82,10 +82,10 @@ If you have several private VPC, they can connect with each other - via peering.
 
    - Think of VPC as a logical datacenter in AWS;
    - Consists of:
-    - Internet Gateways (or Virtual Private Gateways);
-    - Route Tables;
-    - Network Access Control Lists;
-    - Security Groups;
+      - Internet Gateways (or Virtual Private Gateways);
+      - Route Tables;
+      - Network Access Control Lists;
+      - Security Groups (exist only within VPC, so it can be seen from another VPC;
    - 1 Subnet = 1 AZ;
    - Security Groups are **stateful**; Network Access Control Lists are **stateless** (so in first case opened port 80 for inbound automatically opens port for outpound, in second - not automatically);
    - NO TRANSITIVE PEERING
