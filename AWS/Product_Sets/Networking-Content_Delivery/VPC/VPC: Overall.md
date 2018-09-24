@@ -42,7 +42,7 @@ AWS allows you to use following IP ranges for subnets:
   
 Example of the WebSite to count CIDR: [http://cidr.xyz/](http://cidr.xyz/)
 
-You always lose 5 IP addresses from your range (first 4 and last 1), [For example](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing), in a subnet with CIDR block 10.0.0.0/24, the following five IP addresses are reserved:
+You always lose 5 IP addresses from your range (first 4 and last 1). [For example](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing), in a subnet with CIDR block 10.0.0.0/24, the following five IP addresses are reserved:
   - 10.0.0.0: Network address.
   - 10.0.0.1: Reserved by AWS for the VPC router.
   - 10.0.0.2: Reserved by AWS. The IP address of the DNS server is always the base of the VPC network range plus two; however, we also reserve the base of each subnet range plus two. For VPCs with multiple CIDR blocks, the IP address of the DNS server is located in the primary CIDR. For more information, see [Amazon DNS Server](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html#AmazonDNS).
