@@ -90,7 +90,7 @@ If you have several private VPC, they can connect with each other - via peering.
    - Security Groups are **stateful**; Network Access Control Lists are **stateless** (so in first case opened port 80 for inbound automatically opens port for outpound, in second - not automatically);
    - NO TRANSITIVE PEERING
 
-
+> Note: only 1 Internet GateWay may be attached to VPC
 
 
 
