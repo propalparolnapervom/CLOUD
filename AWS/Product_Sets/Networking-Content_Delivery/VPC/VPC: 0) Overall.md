@@ -50,8 +50,9 @@ You always lose 5 IP addresses from your range (first 4 and last 1). [For exampl
   - 10.0.0.255: Network broadcast address. We do not support broadcast in a VPC, therefore we reserve this address.
 
 
-
-`/28` is mask for smalest range of IP adresses you can have in AWS.
+This facts are questionable:
+  - `/16` is mask for biggest range of IP adresses you can have in AWS.
+  - `/28` is mask for smalest range of IP adresses you can have in AWS.
 
 **Rout table** between subnets define which subnet can talk with which subnet.
 
