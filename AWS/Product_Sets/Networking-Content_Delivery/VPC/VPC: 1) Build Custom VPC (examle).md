@@ -226,14 +226,56 @@ You want to have 1 subnet publically available, so it has to get Public IP autom
 
 **Give your public subnet ability to get Public IP**
 
+Click **Subnets** link.
+
+Check your eventually public subnet (`10.0.1.0-eu-central-1a`).
+
+Click **Actions** drop-down list, click **Modify auto-assign IP settings** option.
+```
+Auto-assign IPv4: Enable auto-assign public IPv4 address is checked
+```
+
+Click **Save** button.
 
 
 
+### VERIFICATION: PUBLIC/PRIVATE SUBNETS
 
+Create EC2 instances.
 
+**In the public subnet**
+```
+...
+Network: ...xbsVPC...
+Subnet: ...10.0.1.0-eu-central-1a...
+Auto-assign Public IP: Use subnet setting (Enable)
+...
+Name: PublicServer
+...
+Create a new security group   <== security groups are available only within VPC, so no security groups in the new VPC
+  HTTP 80
+  SSH 22
+```
 
+**In the private subnet**
+```
+...
+Network: ...xbsVPC...
+Subnet: ...10.0.2.0-eu-central-1b...
+Auto-assign Public IP: Use subnet setting (Disable)
+...
+Name: PrivateServer
+...
+Choose a deault security group   <== as you don't wan't it to be opened to the world
+```
 
+Check that 1 server is public, another one is not.
 
+__________________
+
+So eventually we have following picture:
+
+[customVPC_step3.JPG]
 
 
 
