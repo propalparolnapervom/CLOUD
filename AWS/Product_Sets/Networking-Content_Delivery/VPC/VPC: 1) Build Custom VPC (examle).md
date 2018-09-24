@@ -76,7 +76,7 @@ Hit **Create** button.
 
 Hit **Close** button.
 
-> Note: we've defined subnet for 256 adddresses, only 251 are available. That's because 5 addresses (first 4 and 1 last one) are always reserved by AWS. See Overall section.
+> Note: we've defined subnet for 256 addresses, but only 251 are available. That's because 5 addresses (first 4 and 1 last one) are always reserved by AWS. See Overall section.
 
 
 #### SUBNET 2
@@ -103,25 +103,128 @@ So following is created by now:
 [customVPC_step2.JPG]
 
 
+So we've got 2 subnets now:
+  - there's nothing inside them;
+  - they are both private now.
 
 
 
+### CREATING INTERNET GATEWAY
+
+#### CREATE IGW
+
+Create an Internet Gateway for VPC, so 1 of 2 already created Subnets became eventually public (got Internet connectivity).
+
+Click **Internet Gateways** link.
+
+Hit **Create internet gateway** button.
+```
+Name tag: xbsIGW
+```
+
+Hit **Create** button.
+
+Hit **Close** button.
+
+
+#### ATTACH IGW
+
+Just created Internet Gateway is Detached by default. So it's need to be attached.
+
+Check just created IGW.
+
+**Attach to VPC** from **Actions** drop-down list.
+```
+VPC: ...xbsVPC...   <== choose your VPC
+```
+
+Hit **Attach** button.
+
+> Note: You can't have multiply IGW withing one VPC. Just try to attach another one IGW to your VPC ...
 
 
 
+### ROUTE TABLE
+
+**Route tables** are created by default when you create your VPC. 
+
+After such default creation Route Table became **main** table (Main:yes attribute on Summary tab).
+
+All subnets inplicitly associated with Main Route Table, if no other was specified.
+
+So: 
+  - you don't wan't, for example, your Main Route Table has an Intenet access (all new subnets in this case will have Internet access by default);
+  - if subnet is not associated with some Route Table explicitly, it will be associated with Main Route Table by default.
+
+
+#### CREATE ADDITIONAL ROUTE TABLE TO ACCESS INET
+
+Because of reasons above, to access Internet let's create a new (separate one) Route Table.
+
+
+**Create additional Route Table**
+
+Click **Route Tables** link.
+
+Hit **Create Route Table** button.
+```
+Name tag: xbsInternetRouteOut
+VPC: ...xbsVPC...
+```
+
+Hit **Yes, Create** button.
+
+> Notice: this is not 'Main' Route Table
+
+
+**Enable Internet Access for the Route Table**
+
+Check just created `xbsInternetRouteOut` Route Table.
+
+Click **Routes** tab.
+
+Click **Edit** button.
+
+Click **Add another route** button.
+```
+Destination: 0.0.0.0/0    <== "any IP address"
+Target: ...xbsIGW...      <== your Internet Gateway
+```
+
+Click **Save** button.
+
+
+#### ASSOCIATE A SUBNET WITH INET ROUTE TABLE
+
+So we have:
+  - 2 private subnets;
+  - 2 Route Tables:
+    - default, with no Internet access;
+    - just created one, with Internet access.
+    
+**Make 1 Subnet public**
+
+Check just created `xbsInternetRouteOut` Route Table (the one with Internet access).
+
+Click **Subnet Associations** tab.
+
+Click **Edit** button.
+
+Check necessary subnet (`10.0.1.0-eu-central-1a`, for example).
+
+Click **Save** button.
+
+Make sure the subnet now in the list of explicitly defined subnets, associated with current Route Table `xbsInternetRouteOut`.
 
 
 
+### GIVE YOUR PUBLIC SUBNET PUBLIC IP
 
+By default when you create a subnet, it doesn't have ability to get Public IP automatically. You need to specify it excplicitly.
 
+You want to have 1 subnet publically available, so it has to get Public IP automatically.
 
-
-
-
-
-
-
-
+**Give your public subnet ability to get Public IP**
 
 
 
