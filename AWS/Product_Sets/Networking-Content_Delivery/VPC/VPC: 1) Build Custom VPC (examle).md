@@ -46,7 +46,8 @@ Following things you have to create manually:
 
 All you've created so far:
 
-[customVPC_step1.JPG]
+![This is Inline style](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/customVPC_step1.JPG "You have for now")
+
 
 
 
@@ -100,7 +101,7 @@ Hit **Close** button.
 
 So following is created by now:
 
-[customVPC_step2.JPG]
+![This is Inline style](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/customVPC_step2.JPG "You have for now")
 
 
 So we've got 2 subnets now:
@@ -275,7 +276,9 @@ __________________
 
 So eventually we have following picture:
 
-[customVPC_step3.JPG]
+![This is Inline style](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/customVPC_step3.JPG "You have for now")
+
+For now this 2 EC2 instances are not allowed to communicate with each other as they are in the different Security Groups.
 
 
 
