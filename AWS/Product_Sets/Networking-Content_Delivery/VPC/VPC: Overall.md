@@ -28,7 +28,9 @@ Every Region in the world has default VPC. You get that setup when you first set
 You can have multiply VPC in the Region. By default that limit is 5, but you can make it bigger by e-mailing to AWS.
 
 
-## IP and SUBNETS
+## IP vs SUBNETS
+
+[Docs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
 
 Each **Subnet** - different AZ.
 
@@ -39,6 +41,15 @@ AWS allows you to use following IP ranges for subnets:
   - 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
   
 Example of the WebSite to count CIDR: [http://cidr.xyz/](http://cidr.xyz/)
+
+You always lose 5 IP addresses from your range (first 4 and last 1), [For example](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing), in a subnet with CIDR block 10.0.0.0/24, the following five IP addresses are reserved:
+  - 10.0.0.0: Network address.
+  - 10.0.0.1: Reserved by AWS for the VPC router.
+  - 10.0.0.2: Reserved by AWS. The IP address of the DNS server is always the base of the VPC network range plus two; however, we also reserve the base of each subnet range plus two. For VPCs with multiple CIDR blocks, the IP address of the DNS server is located in the primary CIDR. For more information, see [Amazon DNS Server](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html#AmazonDNS).
+  - 10.0.0.3: Reserved by AWS for future use.
+  - 10.0.0.255: Network broadcast address. We do not support broadcast in a VPC, therefore we reserve this address.
+
+
 
 `/28` is mask for smalest range of IP adresses you can have in AWS.
 
