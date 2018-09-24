@@ -10,11 +10,7 @@ Build your own Custom VPC
 
 
 
-
-## STEPS
-
-
-### CREATING VPC
+## 1) CREATING VPC
 
 Go to **VPC** service.
 
@@ -53,13 +49,13 @@ All you've created so far:
 
 
 
-### CREATING SUBNETS
+## 2) CREATING SUBNETS
 
 Create 2 subnets in different AZ.
 
 > Remember: 1 subnet = 1 AZ
 
-#### SUBNET 1
+### 2.1) SUBNET 1
 
 Click **Subnets** link.
 
@@ -80,7 +76,7 @@ Hit **Close** button.
 > Note: we've defined subnet for 256 addresses, but only 251 are available. That's because 5 addresses (first 4 and 1 last one) are always reserved by AWS. See Overall section.
 
 
-#### SUBNET 2
+### 2.2) SUBNET 2
 
 Click **Subnets** link.
 
@@ -110,9 +106,9 @@ So we've got 2 subnets now:
 
 
 
-### CREATING INTERNET GATEWAY
+## 3) CREATING INTERNET GATEWAY
 
-#### CREATE IGW
+### 3.1) CREATE IGW
 
 Create an Internet Gateway for VPC, so 1 of 2 already created Subnets became eventually public (got Internet connectivity).
 
@@ -128,7 +124,7 @@ Hit **Create** button.
 Hit **Close** button.
 
 
-#### ATTACH IGW
+### 3.2) ATTACH IGW
 
 Just created Internet Gateway is Detached by default. So it's need to be attached.
 
@@ -145,7 +141,7 @@ Hit **Attach** button.
 
 
 
-### ROUTE TABLE
+## 4) ROUTE TABLE
 
 **Route tables** are created by default when you create your VPC. 
 
@@ -158,7 +154,7 @@ So:
   - if subnet is not associated with some Route Table explicitly, it will be associated with Main Route Table by default.
 
 
-#### CREATE ADDITIONAL ROUTE TABLE TO ACCESS INET
+### 4.1) CREATE ADDITIONAL ROUTE TABLE TO ACCESS INET
 
 Because of reasons above, to access Internet let's create a new (separate one) Route Table.
 
@@ -195,7 +191,7 @@ Target: ...xbsIGW...      <== your Internet Gateway
 Click **Save** button.
 
 
-#### ASSOCIATE A SUBNET WITH INET ROUTE TABLE
+### 4.2) ASSOCIATE A SUBNET WITH INET ROUTE TABLE
 
 So we have:
   - 2 private subnets;
@@ -219,7 +215,7 @@ Make sure the subnet now in the list of explicitly defined subnets, associated w
 
 
 
-### GIVE YOUR PUBLIC SUBNET PUBLIC IP
+## 5) GIVE YOUR PUBLIC SUBNET PUBLIC IP
 
 By default when you create a subnet, it doesn't have ability to get Public IP automatically. You need to specify it excplicitly.
 
@@ -240,7 +236,7 @@ Click **Save** button.
 
 
 
-### VERIFICATION: PUBLIC/PRIVATE SUBNETS
+## 6) VERIFICATION: PUBLIC/PRIVATE SUBNETS
 
 Create EC2 instances.
 
