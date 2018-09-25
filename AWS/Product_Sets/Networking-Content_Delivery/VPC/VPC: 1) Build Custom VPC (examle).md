@@ -7,7 +7,7 @@ Build your own Custom VPC
   - With 2 Subnets:
     - 1 public;
     - 1 private;
-  - Private subnet still has to have Internet access;
+  - Private subnet still has to have outbound Internet access;
 
 
 
@@ -327,6 +327,149 @@ ssh ec2-user@10.0.2.126 -i kp_frankfurt.pem
 ```
 
 Try to make some updates on `PrivateServer`. You can't. Because you don't have an Internet access.
+
+
+
+## 7.2) NAT INSTANCES
+
+> They are old, NAT Gateway might be used instead. Make following stes just for general understanding.
+
+
+**Launch NAT instance**
+
+Go to **EC2** service.
+
+Hit **Launch instance** button.
+
+Click **Community AMIs** link.
+
+Search and choose the one with "NAT" in the name (`amzn-ami-vpc-nat-hvm-2018.03.0.20180508-x86_64-ebs - ami-0097b5eb`, for example).
+
+Launch instance from it:
+  - in your VPC;
+  - in public subnet;
+  - name it `NAT-INSTANCE`;
+  - in security group that was used for public subnet.
+
+
+
+**Disable Source/Dest Check for NAT instance**
+
+[Docs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html#EIP_Disable_SrcDestCheck)
+
+> Each EC2 instance performs source/destination checks by default. This means that the instance must be the source or destination of any traffic it sends or receives. However, a NAT instance must be able to send and receive traffic when the source or destination is not itself. 
+
+Therefore, you must disable source/destination checks on the NAT instance.
+
+Go to **EC2** service.
+
+Check just created `NAT-INSTANCE` instance.
+
+Click **Actions** drop-down list, **Networking**, then **Change Source/Dest. Check**.
+
+Hit **Yes, Disable** button.
+
+
+
+**Update Route Table to see NAT Instance**
+
+Go to **VPC** service.
+
+Click **Route Tables** link.
+
+Check Main Route Table for your VPC (the one without Internet access).
+
+Click **Routes** tab.
+
+Hit **Edit** button, hit **Add another route** button.
+```
+Destination: 0.0.0.0/0
+Target: ...NAT-INSTANCE...
+```
+
+Hit **Save button**.
+
+Now outbound Internet access is available for `PrivatServer`.
+
+___________________________________
+
+> All traffic for Private Subnet goes through 1 NAT instance, so it might be a bottleneck (t2.micro, for example).
+
+> It relies on a single OS on NAT instance, so if it crashes, we're going to lose all internet for Private Subnet.
+
+> Yes, it can be put in Autoscaling Groups, in multiply AZ, but it becomes more complicated.
+
+
+That's why new NAT Gateway is much better: automation of all that steps, so eventually we're relying on a single instance in the single AZ.
+
+_______________________
+
+Terminate `NAT-INSTANCE`.
+
+
+
+### 7.3) NAT GATEWAY
+
+> NOTE: NAT Gateway operates only for IPv4. For IPv6 you have to use Engress Only Internet Gateways
+
+Go to **VPC** service.
+
+Click **NAT Gateways** link.
+
+Hit **Create NAT Gateway** button.
+
+```
+Subnet:                       <== chose your public subnet
+Elastic IP Allocation ID:     <== Hit "Create New EIP" for now
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
