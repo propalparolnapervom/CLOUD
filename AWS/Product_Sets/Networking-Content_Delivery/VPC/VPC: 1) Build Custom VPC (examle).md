@@ -7,6 +7,7 @@ Build your own Custom VPC
   - With 2 Subnets:
     - 1 public;
     - 1 private;
+  - Private subnet still has to have Internet access;
 
 
 
@@ -251,6 +252,7 @@ Name: PublicServer
 ...
 Create a new security group   <== security groups are available only within VPC, so no security groups in the new VPC
   HTTP 80
+  HTTPS 443
   SSH 22
 ```
 
@@ -277,14 +279,53 @@ So eventually we have following picture:
 For now this 2 EC2 instances are not allowed to communicate with each other as they are in the different Security Groups.
 
 
+## 7) MAKE INTERNET AVAILABLE FROM PRIVATE SUBNET 
+
+### 7.1) VERIFY PRIVATE SERVER HAS NO INET
+
+**Create a new Security Group from private subnet**
+
+Let's say, DB will be placed on private subnet. 
+
+So create a new security group `xbsRDS` for private subnet to open necessary ports for `10.0.1.0/24` source (our public subnet):
+```
+HTTP 80
+HTTPS 443
+SSH 22
+MYSQL/Aurora 3306
+All ICMP IPv4 0-65535
+```
+
+Place `PrivateServer` into just create `xbsRDS` security group.
 
 
+**Connect to PrivateServer from PublicServer**
 
+SSH to `PublicServer`.
 
+Ping `PrivateServer` (its private IP).
 
+> NOTE: !!! NEVER PLACE KEYS ON PROD!!! JUST LEARNING AIM !!!
+> !!! BASTIONS SHOULD BE USED INSTEAD !!!
 
+Place private key for `PrivateServer` on `PublicServer` to connect to `PrivateServer`.
+  - Find private key on your local PC;
+  - Copy it;
+  - On the `PublicServer` as root user:
+```
+mkdir ~/dont_do_like_this
+cd ~ec2-user/dont_do_like_this
+vim kp_frankfurt.pem
+chmod 400 kp_frankfurt.pem
+```
 
+Connect to `PrivateServer` via its Private IP.
+```
+cd ~ec2-user/dont_do_like_this
+ssh ec2-user@10.0.2.126 -i kp_frankfurt.pem
+```
 
+Try to make some updates on `PrivateServer`. You can't. Because you don't have an Internet access.
 
 
 
