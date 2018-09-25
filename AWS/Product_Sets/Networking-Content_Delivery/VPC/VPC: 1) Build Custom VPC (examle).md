@@ -384,7 +384,7 @@ Click **Routes** tab.
 Hit **Edit** button, hit **Add another route** button.
 ```
 Destination: 0.0.0.0/0
-Target: ...NAT-INSTANCE...
+Target: ...NAT-INSTANCE...   <== check your NAT instance
 ```
 
 Hit **Save button**.
@@ -412,6 +412,9 @@ Terminate `NAT-INSTANCE`.
 
 > NOTE: NAT Gateway operates only for IPv4. For IPv6 you have to use Engress Only Internet Gateways
 
+
+**Create NAT Gateway**
+
 Go to **VPC** service.
 
 Click **NAT Gateways** link.
@@ -421,9 +424,39 @@ Hit **Create NAT Gateway** button.
 ```
 Subnet:                       <== chose your public subnet
 Elastic IP Allocation ID:     <== Hit "Create New EIP" for now
+```
+
+Hit **Create a NAT Gateway** button.
+
+Hit **Close** button.
+
+Wait some time until your NAT Gateway will be created (its status changed to **available**).
 
 
+**Update Route Table to see NAT Gateway**
 
+Go to **VPC** service.
+
+Click **Route Tables** link.
+
+Check Main Route Table for your VPC (the one without Internet access).
+
+Click **Routes** tab.
+
+Hit **Edit** button, hit **Add another route** button.
+```
+Destination: 0.0.0.0/0
+Target: ...nat...         <== chose your NAT Gateway
+```
+
+Hit **Save button**.
+
+Now outbound Internet access is available for `PrivatServer`.
+
+How it looks now:
+
+
+![This is Inline style](https://github.com/propalparolnapervom/OVERALL/blob/master/Pictures/customVPC_step4.JPG "You have for now")
 
 
 
