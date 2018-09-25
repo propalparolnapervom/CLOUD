@@ -306,6 +306,7 @@ SSH to `PublicServer`.
 Ping `PrivateServer` (its private IP).
 
 > NOTE: !!! NEVER PLACE KEYS ON PROD!!! JUST LEARNING AIM !!!
+
 > !!! BASTIONS SHOULD BE USED INSTEAD !!!
 
 Place private key for `PrivateServer` on `PublicServer` to connect to `PrivateServer`.
