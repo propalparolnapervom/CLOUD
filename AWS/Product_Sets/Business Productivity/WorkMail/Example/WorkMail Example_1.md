@@ -74,7 +74,7 @@ Click **Create Record Set** button.
 Name: _amazonses.xburser.com.
 Type: TXT - Text
 Alias: No radiobutton is selected.
-Value: NycvpGe9u4uOPvXZv8iB0sY1s85Wm2GdEZFfbdfCV1k=       <== as described on appropriate WorkMail config step
+Value: NycvWm2dfCV1k=       <== as described on appropriate WorkMail config step
 Routing Policy: Simple
 ```
 
