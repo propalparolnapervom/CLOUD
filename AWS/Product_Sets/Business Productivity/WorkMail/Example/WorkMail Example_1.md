@@ -1,7 +1,11 @@
 # WORKMAIL EXAMPLE_1
 
-Setup Amazon WorkMail in the simplest way.
+Setup Amazon WorkMail in the simplest way:
+  - for organization `xbs-united` (so e-mail available via browser via [https://xbs-united.awsapps.com/mail](https://xbs-united.awsapps.com/mail))
+  - for (already existing) domain `xburser.com`
+  - for user `xburser`
 
+(so working e-mail `xburser@xburser.com` has to be as a result)
 
 
 
@@ -170,6 +174,49 @@ Click **Close** button.
 Your domain `xburser.com` has to have **Verified** status.
 
 > It took me 5 min to get that status.
+
+
+
+
+
+## ADD USER ACCOUNT
+
+After successful verification we are now ready to create email accounts.
+
+Click on **Users** on the left menu and click on **Add user**.
+```
+User name: xburser
+First name: Sergii
+Last name: Burtovyi
+Display name: Sergii Burtovyi
+```
+
+Click **Next Step**.
+
+Provide the primary email address and password of the new user.
+```
+Email address: xburser@xburser.com
+Password:
+Repeat password:
+```
+
+Click **Add user**.
+
+
+
+## VERIFY EMAIL
+
+Go to [https://xbs-united.awsapps.com/mail](https://xbs-united.awsapps.com/mail).
+
+Login as just created `xburser@xburser.com`.
+
+Try to send/receive mails.
+
+
+
+
+
+
 
 
 
