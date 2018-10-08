@@ -14,7 +14,7 @@ You can integrate Amazon WorkMail with your existing corporate directory and con
 
 _________
 
-You can access Amazon WorkMail using the web application: [https://*alias*.awsapps.com/mail](https://*alias*.awsapps.com/mail).
+You can access Amazon WorkMail using the web application: [https://**alias**.awsapps.com/mail](https://*alias*.awsapps.com/mail).
 
 
 
