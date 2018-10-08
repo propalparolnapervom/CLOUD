@@ -195,7 +195,7 @@ Click **Next Step**.
 
 Provide the primary email address and password of the new user.
 ```
-Email address: xburser@xburser.com
+Email address: xburser@xburser.com    <== "xbs-united.awsapps.com" may be used too
 Password:
 Repeat password:
 ```
