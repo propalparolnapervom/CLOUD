@@ -69,7 +69,7 @@ Generate private key
 openssl genrsa -out ca.key 2048
 ```
 
-Generate CSR
+Generate certificate signing request (CSR)
 ```
 openssl req -new -key ca.key -out ca.csr
 
