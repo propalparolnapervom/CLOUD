@@ -93,12 +93,18 @@ Place HTML-page to `xbs-web-bash` S3 bucket.
 aws s3 cp D:\Khlam\html\index.html s3://xbs-web-bash
 ```
 
+Place Dir to S3 bucket
+```
+aws s3 cp SOURCE_DIR s3://DEST_BUCKET/ --recursive
+```
+
 **Bucket to Local PC**
 
 Place HTML-page to `xbs-web-bash` S3 bucket.
 ```
 aws s3 cp s3://xbs-web-bash/index.html D:\Khlam\html
 ```
+
 
 
 
