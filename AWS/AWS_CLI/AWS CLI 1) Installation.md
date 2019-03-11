@@ -6,6 +6,7 @@
 
 [For Linux/Mac](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html)
 
+[For Amazon Linux](https://docs.aws.amazon.com/cli/latest/userguide/install-linux-al2017.html)
 
 ## WINDOWS
 
@@ -56,7 +57,33 @@ Check that awscli is available
 aws --version
 ```
 
+## AMAZON LINUX
 
+Use the curl command to download the installation script.
+```
+curl -O https://bootstrap.pypa.io/get-pip.py
+```
+
+Run the script with Python to download and install the latest version of pip and other required support packages.
+```
+python get-pip.py --user
+```
+
+Add pip3 to PATH
+```
+echo "export PATH=~/.local/bin:$PATH" >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+Use pip3 install to install the latest version of the AWS CLI. We recommend that if you have Python version 3+ installed that you use pip3.
+```
+pip2.7 install awscli --upgrade --user
+```
+
+Check that awscli is available
+```
+aws --version
+```
 
 
 
