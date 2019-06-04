@@ -105,6 +105,11 @@ Place HTML-page to `xbs-web-bash` S3 bucket.
 aws s3 cp s3://xbs-web-bash/index.html D:\Khlam\html
 ```
 
+Place content of the `db_recreation` dir from S3 bucket to local PC
+```
+aws s3 sync s3://bucket_name/path_to_folder/db_recreation .
+```
+
 
 
 
