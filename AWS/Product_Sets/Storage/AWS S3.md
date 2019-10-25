@@ -76,6 +76,7 @@ To copy all existing files from original bucket use AWS CLI.
   
 ### ENCRYPTION
 
+[Good article to read](https://cloudonaut.io/encrypting-sensitive-data-stored-on-s3/)
 [Protecting Data using Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html)
 
 - During transition data from you to bucket:
