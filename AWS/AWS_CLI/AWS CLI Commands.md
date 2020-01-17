@@ -55,11 +55,16 @@ aws s3 ls
       2018-08-19 10:28:33 xburserlondon
 ```
 
-List buckets, files time modification older then some date
+List buckets, files time modification NEWER then some date
 ```
 BUCKET_NAME="90poe-ui-drydock"
-DATE_MONTH_AGO="2016-05-20"
-aws s3api list-objects --bucket ${BUCKET_NAME} --query 'Contents[?LastModified>`${DATE_MONTH_AGO}`][].{Key: Key}'
+aws s3api list-objects --bucket ${BUCKET_NAME} --query 'Contents[?LastModified>`2020-01-16`][].{Key: Key}'
+```
+
+List buckets, files time modification OLDER then some date
+```
+BUCKET_NAME="90poe-ui-drydock"
+aws s3api list-objects --bucket ${BUCKET_NAME} --query 'Contents[?LastModified<`2020-01-16`][].{Key: Key}'
 ```
 
 #### CREATE
