@@ -130,8 +130,80 @@ aws s3 cp s3://bucket_name/path_to_folder/db_recreation . --recursive
 
 
 
+## EKS
+
+Which IAM account you have used to log in to AWS 
+```
+aws sts get-caller-identity 
+
+{
+    "UserId": "ASDFASFD:<you_account_name>",
+    "Account": "<you_account_number>",
+    "Arn": "arn:aws:sts::<you_account_number>:assumed-role/<iam_role_name>/<you_account_number>"
+}
+```
+
+Get a cluster authentication token
+```
+aws eks get-token --cluster-name <EKS_CLUSTER_NAME>
+```
+
+Describe EKS cluster
+```
+aws eks describe-cluster --name <EKS_CLUSTER_NAME>
+
+{
+    "cluster": {
+        "name": "<EKS_CLUSTER_NAME>",
+        "arn": "arn:aws:eks:us-east-1:<aws_acc_number>:cluster/<EKS_CLUSTER_NAME>",
+        "createdAt": <SOME_TIME>,
+        "version": "1.17",
+        "endpoint": "https://<some_code>.gr7.<aws_region>.eks.amazonaws.com",
+        "roleArn": "arn:aws:iam::<aws_acc_number>:role/<iam_role_name>",
+        "resourcesVpcConfig": {
+            "subnetIds": [
+               ...
+            ],
+            "securityGroupIds": [
+               ...
+            ],
+            "clusterSecurityGroupId": <some_SG_name>,
+            "vpcId": <SOME_VPC_NAME>,
+            "endpointPublicAccess": true,
+            "endpointPrivateAccess": false,
+            "publicAccessCidrs": [
+               ...
+            ]
+        },
+        "kubernetesNetworkConfig": {
+               ...
+        },
+        "logging": {
+            "clusterLogging": [
+                {
+                    "types": [
+                        ...
+                    ],
+                    "enabled": false
+                }
+            ]
+        },
+        "identity": {
+            "oidc": {
+               ...
+            }
+        },
+        "status": "ACTIVE",
+        "certificateAuthority": {
+            "data": "<CERTIFIACTE_FOR_YOU_CLUSTER>"
+        },
+        "platformVersion": "eks.4",
+        "tags": {}
+    }
+}
 
 
+```
 
 
 
