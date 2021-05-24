@@ -157,7 +157,7 @@ aws-iam-authenticator verify -i jenkins-new -t "k8s-aws-v1..."
 
 Create a KUBECONFIG file automatically (dry-run)
 ```
-aws eks update-kubeconfig --name jenkins-new --region us-east-1 --role-arn arn:aws:iam::557804530956:role/jenkins-terraform --dry-run
+aws eks update-kubeconfig --name <EKS_CLUSTER_NEW> --region <EKS_AWS_REGION> --role-arn <AWS_IAM_ROLE_TO_AUTH_WITH> --dry-run
 ```
 
 ### Cluster
