@@ -156,7 +156,7 @@ aws eks get-token --cluster-name <EKS_CLUSTER_NAME> -r <AWS_IAM_ROLE_YOU_AUTH_WI
 
 Verify a token
 ```
-aws-iam-authenticator verify -i jenkins-new -t "k8s-aws-v1..."
+aws-iam-authenticator verify -i <EKS_CLUSTER_NAME> -t "k8s-aws-v1..."
 ```
 
 Create a KUBECONFIG file automatically (dry-run)
