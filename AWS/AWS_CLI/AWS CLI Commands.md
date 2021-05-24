@@ -148,6 +148,10 @@ aws sts get-caller-identity
 Get a cluster authentication token
 ```
 aws eks get-token --cluster-name <EKS_CLUSTER_NAME>
+
+   # OR
+   
+aws eks get-token --cluster-name <EKS_CLUSTER_NAME> -r <AWS_IAM_ROLE_YOU_AUTH_WITH_ON_EKS>
 ```
 
 Verify a token
