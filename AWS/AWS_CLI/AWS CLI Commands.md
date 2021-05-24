@@ -132,6 +132,8 @@ aws s3 cp s3://bucket_name/path_to_folder/db_recreation . --recursive
 
 ## EKS
 
+### Authentication
+
 Which IAM account you have used to log in to AWS 
 ```
 aws sts get-caller-identity 
@@ -147,6 +149,18 @@ Get a cluster authentication token
 ```
 aws eks get-token --cluster-name <EKS_CLUSTER_NAME>
 ```
+
+Verify a token
+```
+aws-iam-authenticator verify -i jenkins-new -t "k8s-aws-v1..."
+```
+
+Create a KUBECONFIG file automatically (dry-run)
+```
+aws eks update-kubeconfig --name jenkins-new --region us-east-1 --role-arn arn:aws:iam::557804530956:role/jenkins-terraform --dry-run
+```
+
+### Cluster
 
 Describe EKS cluster
 ```
