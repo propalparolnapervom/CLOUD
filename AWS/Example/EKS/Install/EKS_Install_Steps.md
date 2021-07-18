@@ -5,11 +5,18 @@
 
 # Installation steps
 
+Mine variables to help run further steps
 ```
 export AWS_REGION="eu-central-1"
+export AWS_ACCOUNT="491792459462"
+export EKS_CLUSTER_NAME="my-cluster"
+export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/kubernetes_experiments/KUBECONFIG_${EKS_CLUSTER_NAME}"
 ```
 
-## 1. Create EKS
+
+# Step 1: Create your Amazon EKS cluster 
+
+Basicly, Kubernetes `control plain` is created on this block of steps.
 
 1. Create an Amazon VPC
 ```
@@ -31,18 +38,17 @@ aws iam attach-role-policy \
   --role-name myAmazonEKSClusterRole
 ```
 
-3-8. Create EKS cluster as described on this steps
+3-8. Create EKS cluster (its control plain) as described on this steps
 [https://console.aws.amazon.com/eks/home#/clusters](https://console.aws.amazon.com/eks/home#/clusters)
 
 
-## 2. Configure access to EKS from your local machine
 
-```
-export AWS_REGION="eu-central-1"
-export AWS_ACCOUNT="491792459462"
-export EKS_CLUSTER_NAME="my-cluster"
-export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/kubernetes_experiments/KUBECONFIG_${EKS_CLUSTER_NAME}"
-```
+
+# Step 2: Configure your computer to communicate with your cluster
+
+> NOTE: Connection works on this step only if same IAM user was used during:
+>  1) creating EKS cluster (control plain) via AWS managed console;
+>  2) to setup credentials on your local machine, where you run `kubectl`
 
 Show content of possible KUBECONFIG file (dry-run)
 ```
@@ -54,14 +60,21 @@ Test connection
 kubectl get svc
 ```
 
-## 3. Create an IAM OpenID Connect (OIDC) provider
 
-OpenID Connect provider URL
+# Step 3: Create an IAM OpenID Connect (OIDC) provider
+
+Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes service accounts used by workloads can access AWS resources. You only need to complete this step one time for a cluster.
+
+1-8. Do the steps
 
 [https://oidc.eks.eu-central-1.amazonaws.com/id/495D8CF9516BE87DC49ACFC20D44C355](https://oidc.eks.eu-central-1.amazonaws.com/id/495D8CF9516BE87DC49ACFC20D44C355)
 
 
-## 4. Create nodes
+
+
+## Step 4: Create nodes
+
+So Kubernetes `control plain` is created by now. Have to add `woker nodes` now.
 
 > You can create a cluster with one of the following node types:
 >  - Fargate
@@ -110,7 +123,7 @@ aws iam attach-role-policy \
 
 2. Associate the Kubernetes service account used by the VPC CNI plugin to the IAM role.
 
-> NOTE: Assumtions is that you are installing EKS version starting from 1.18, 
+> NOTE: Assumtion is that you are installing EKS version starting from 1.18, 
 > where Amazon VPC CNI is already installed automatically by this time
 > (during creation of control plain)
 > 
@@ -120,4 +133,55 @@ aws eks update-addon \
   --addon-name vpc-cni \
   --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT}:role/myAmazonEKSCNIRole 
 ```
+
+3. Create a node IAM role and attach the required Amazon EKS IAM managed policy to it. The Amazon EKS node kubelet daemon makes calls to AWS APIs on your behalf. Nodes receive permissions for these API calls through an IAM instance profile and associated policies.
+```
+# Create node-role-trust-policy.json file
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+
+# Create the node IAM role from that node-role-trust-policy.json file
+aws iam create-role \
+  --role-name myAmazonEKSNodeRole \
+  --assume-role-policy-document file://"node-role-trust-policy.json"
+
+
+# Attach the required Amazon EKS managed IAM policies to the role.
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy \
+  --role-name myAmazonEKSNodeRole
+  
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly \
+  --role-name myAmazonEKSNodeRole
+
+```
+
+4-12. Create nodes (EKS managed ones!)
+
+[https://console.aws.amazon.com/eks/home#/clusters](https://console.aws.amazon.com/eks/home#/clusters)
+
+To be able to SSH to the node once it's created, specify `SSH key` on this step. Or create as following:
+
+```
+aws ec2 create-key-pair --region ${AWS_REGION} --key-name xbsTestEKSCreationNode > xbsTestEKSCreationNode.pem
+```
+
+Specify this `SSH key` on the web-page then.
+
+Create SG with access only from your local machine, to be able to connect to the created Node, but restrict access for others.
+
+
+
+
 
