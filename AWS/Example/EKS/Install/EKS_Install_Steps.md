@@ -179,7 +179,7 @@ aws ec2 create-key-pair --region ${AWS_REGION} --key-name xbsTestEKSCreationNode
 
 Specify this `SSH key` on the web-page then.
 
-Create SG with access only from your local machine, to be able to connect to the created Node, but restrict access for others.
+> NOTE: SG following SG will be created - with access only from your local machine, to be able to connect to the created Node, but restrict access for others - the EKS cluster can't work, as Nodes can't be accessed from EKS controlplain.
 
 
 
