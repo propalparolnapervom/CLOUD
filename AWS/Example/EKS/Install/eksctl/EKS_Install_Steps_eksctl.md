@@ -38,8 +38,6 @@ eksctl create cluster \
 --name ${EKS_CLUSTER_NAME} \
 --region ${AWS_REGION} \
 --with-oidc \
---ssh-access \
---ssh-public-key ${SSH_KEY_4_WORK_NODES} \
 --managed
 ```
 
