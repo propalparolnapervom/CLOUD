@@ -27,8 +27,10 @@ It's about how to create an EKS cluster with 1 command - so it doesn't give an e
 Set up necessary vars
 ```
 export EKS_CLUSTER_NAME="my-cluster-via-eksctl"
+export EKS_VER="1.17"
 export AWS_REGION="eu-central-1"
 export SSH_KEY_4_WORK_NODES="/home/sburtovyi/overall/to_del_dir/k8s_experiments/xbsTestEKSCreationNode.pem"
+export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/${EKS_CLUSTER_NAME}.kubeconfig"
 
 ```
 
@@ -36,14 +38,16 @@ Run installation command with necessary keys (if some key is not specified, defa
 ```
 eksctl create cluster \
 --name ${EKS_CLUSTER_NAME} \
+--version ${EKS_VER} \
 --region ${AWS_REGION} \
 --with-oidc \
+--kubeconfig ${KUBECONFIG} \
 --managed
 ```
 
 # DELETE EKS
 
 ```
-eksctl delete cluster --name my-cluster --region us-west-2
+eksctl delete cluster --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
 ```
 
