@@ -95,6 +95,19 @@ Install EKS cluster from the file
 eksctl create cluster -f eks_cluster.yaml
 ```
 
+# CONNECT
+
+```
+export AWS_REGION="eu-central-1"
+export AWS_ACCOUNT="491792459462"
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
+export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/KUBECONFIG_${EKS_CLUSTER_NAME}"
+
+aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION} --dry-run > ${KUBECONFIG}
+
+kubectl get pods --all-namespaces
+```
+
 # DELETE EKS
 
 ```
