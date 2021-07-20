@@ -9,9 +9,14 @@
 
 # Preparation
 
-> NOTE: To update the cluster, Amazon EKS requires two to three free IP addresses from the subnets that were provided when you created the cluster. 
-> If these subnets don't have available IP addresses, then the update can fail. 
-> Additionally, if any of the subnets or security groups that were provided during cluster creation have been deleted, the cluster update process can fail.
+## Subnets have free IP
+To update the cluster, Amazon EKS requires two to three free IP addresses from the subnets that were provided when you created the cluster. 
+If these subnets don't have available IP addresses, then the update can fail. 
+
+For example, go to the subnet in AWS Management console, select the subnet, see `Details` tab for free IPs.
+
+## Subnets are original ones
+if any of the subnets or security groups that were provided during cluster creation have been deleted, the cluster update process can fail.
 
 
 # Update EKS cluster (control plane)
