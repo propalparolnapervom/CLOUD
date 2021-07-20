@@ -7,7 +7,7 @@
 [eksctl docs](https://eksctl.io/)
 
 
-## Preparation
+## Pre-installation
 
 ### Subnets have free IP
 To update the cluster, Amazon EKS requires two to three free IP addresses from the subnets that were provided when you created the cluster. 
@@ -66,7 +66,12 @@ kubectl edit configmap coredns -n kube-system -o yaml
 
 
 
+## Post-installation
 
+### Update kubectl
+Update `kubectl` tool on:
+- local machines of all users;
+- CI/CD pipelines (if needed).
 
 
 
