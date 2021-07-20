@@ -22,6 +22,21 @@ eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION}
 eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --approve
 ```
 
+## Nodegroup
+
+### Update
+
+To start version update process for specific Managed node group:
+```
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
+export EKS_NODEGROUP_NAME="managed-ng-1"
+export NEW_EKS_VERSION="1.18"
+
+eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NAME} --kubernetes-version=${NEW_EKS_VERSION}
+
+```
+
+
 ## Addons
 
 [Docs](https://eksctl.io/usage/addons/)
