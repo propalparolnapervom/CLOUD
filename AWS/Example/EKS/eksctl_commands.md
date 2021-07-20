@@ -1,13 +1,28 @@
-# WHAT
+## WHAT
 
 [Docs](https://eksctl.io/)
 
-eksctl is a simple CLI tool for creating and managing clusters on EKS - Amazon's managed Kubernetes service for EC2. 
+`eksctl` is a simple CLI tool for creating and managing clusters on EKS - Amazon's managed Kubernetes service for EC2. 
 It is written in Go, uses CloudFormation, was created by Weaveworks
 
+## Cluster
 
+### Update
 
-# Addons
+Update `K8S` version of your `EKS control plane` on 1 minor version later than it's current version
+```
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
+# Could be only next K8S minor version
+export NEW_EKS_VERSION="1.18"
+
+# Dry-run
+eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION}
+
+# Actual steps
+eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --approve
+```
+
+## Addons
 
 [Docs](https://eksctl.io/usage/addons/)
 
@@ -17,7 +32,7 @@ Starting from `1.18`, EKS contains following 3 default `add-ons`:
 - coredns
 
 
-## List
+### List
 
 Which `default EKS addons` are enabled for your Kubernetes cluster in AWS
 ```
