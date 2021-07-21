@@ -11,6 +11,11 @@ It is written in Go, uses CloudFormation, was created by Weaveworks
 Show list of clusters, available for `eksctl`
 ```
 eksctl get clusters
+
+eksctl get clusters --region eu-west-2
+
+export AWS_REGION=eu-west-2
+eksctl get clusters
 ```
 
 ### Update
