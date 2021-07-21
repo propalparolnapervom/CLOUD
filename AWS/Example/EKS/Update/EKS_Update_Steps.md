@@ -149,7 +149,11 @@ Clusters with GPU nodes only. So - usually skip it.
 
 [Docs: Amazon EKS add-on configuration](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-configuration.html)
 
-Steps depend on K8S version you are updating to, so see original page.
+Steps might depend on:
+- K8S version you are updating to, 
+- Wherher you added you `K8S add-on` as `EKS add-on` or not (starting from `1.18` EKS can manage it for you, if you add it to EKS).
+
+So see original pag
 
 ### 8.1. (Optional) When updated to: `1.18`
 
