@@ -151,11 +151,17 @@ Clusters with GPU nodes only. So - usually skip it.
 
 Steps depend on K8S version you are updating to, so see original page.
 
-#### 8.1. Update: VPC CNI (when updated to `1.18`)
+### 8.1. (Optional) When updated to: `1.18`
+
+#### 8.1.1. Update: VPC CNI
 
 If you updated to `1.18`, you can **add** [Amazon VPC CNI Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#adding-vpc-cni-eks-add-on). 
 
 > NOTE: **add** - as it was not present in EKS before this version.
+> If you have **not added** the Amazon VPC CNI Amazon EKS add-on, the Amazon VPC CNI add-on is still running on your cluster. 
+> You can still update it manually.
+
+#### 8.1.1.1. Add (if you want to add it to EKS)
 
 To add the `vpc-cni` Amazon EKS add-on using `eksctl`:
 ```
@@ -171,7 +177,80 @@ eksctl create addon \
     --force
 ```
 
+#### 8.1.1.2. Not add, but update manually (if you don't want to add it to EKS)
 
+Check current version of the K8S `vpc-cni` add-on.
+```
+kubectl describe daemonset aws-node --namespace kube-system | grep Image | cut -d "/" -f 2
+
+amazon-k8s-cni-init:v1.7.5-eksbuild.1
+amazon-k8s-cni:v1.7.5-eksbuild.1
+```
+> NOTE: Any changes you've made to the plugin's default settings on your cluster can be overwritten 
+> with default settings when applying the new version of the manifest. 
+> To prevent loss of your custom settings, download the manifest, change the default settings as necessary, 
+> and then apply the modified manifest to your cluster. 
+
+> NOTE: You should only update one minor version at a time. 
+> For example, if your current version is `1.6` and you want to update to `1.8`, you should update to `1.7` first, then update to `1.8`.
+
+[Latest VPC-CNI release](https://github.com/aws/amazon-vpc-cni-k8s/releases)
+
+**(Optional) If you DO NOT care about custom parameters of VPC CI**
+Download general manifest file.
+```
+curl -o aws-k8s-cni.yaml https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml
+```
+If necessary, replace `<region-code>` in the following command with the Region that your cluster is in and then run the modified command to replace the Region code in the file (currently `us-west-2`).
+```
+sed -i.bak -e 's/us-west-2/eu-central-1/g' aws-k8s-cni.yaml
+```    
+
+**(Optional: Start) Only if you DO care about possible custom parameters of VPC CNI**
+Remember latest suggested version of the plugin:
+```
+cat aws-k8s-cni.yaml | grep amazon-k8s-cni
+
+        "image": "602401143452.dkr.ecr.eu-central-1.amazonaws.com/amazon-k8s-cni:v1.8.0"
+        "image": "602401143452.dkr.ecr.eu-central-1.amazonaws.com/amazon-k8s-cni-init:v1.8.0"
+```
+
+
+Download current manifest file.
+```
+kubectl get daemonset -n kube-system aws-node -o yaml
+```
+
+Update that part of `aws-k*s-cni.yaml` file with output above, where this `DaemonSet` is defined.
+
+Update lines with plugin images to latest version (those, defined at the very start of this block).
+
+Check what is suggested now (should be the same as above):
+```
+cat aws-k8s-cni.yaml | grep amazon-k8s-cni
+```
+
+**(Optional: Finish) Only if you DO care about possible custom parameters of VPC CNI**
+
+Apply necessary configuration:
+```
+kubectl apply -f aws-k8s-cni.yaml
+
+    clusterrolebinding.rbac.authorization.k8s.io/aws-node unchanged
+    clusterrole.rbac.authorization.k8s.io/aws-node unchanged
+    customresourcedefinition.apiextensions.k8s.io/eniconfigs.crd.k8s.amazonaws.com unchanged
+    daemonset.apps/aws-node configured
+    serviceaccount/aws-node unchanged
+```
+
+Wait until this up and running:
+```
+kubectl get pods -n kube-system | grep aws-node
+```
+Make sure it's `daemonset` has necessary plugin version:
+```
+kubectl describe daemonset aws-node --namespace kube-system | grep Image | cut -d "/" -f 2
+```
 
 
 #### 8.2. Update: CoreDNS
