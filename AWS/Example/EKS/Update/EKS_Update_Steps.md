@@ -145,6 +145,7 @@ update the `Cluster Autoscaler` to the latest version that matches the Kubernete
 Clusters with GPU nodes only. So - usually skip it.
 
 
+
 ### 8. Update: Add-ons
 
 [Docs: Amazon EKS add-on configuration](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-configuration.html)
@@ -155,33 +156,14 @@ Steps might depend on:
 
 So see original page.
 
-### 8.1. (Optional) When add-on is managed by EKS (or needs to be managed by EKS)
-
-#### 8.1.1. Update: VPC CNI
-
-If you updated to `1.18`, you can **add** [Amazon VPC CNI Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#adding-vpc-cni-eks-add-on). 
-
-> NOTE: **add** - as it was not present in EKS before this version.
-> If you have **not added** the Amazon VPC CNI Amazon EKS add-on, the Amazon VPC CNI add-on is still running on your cluster. 
-> You can still update it manually.
-
-#### 8.1.1.1. Add (if you want to add it to EKS)
-
-To add the `vpc-cni` Amazon EKS add-on using `eksctl`:
-```
-export AWS_ACCOUNT_NUM="491792459462"
-export EKS_CLUSTER_NAME="my-cluster-eksctl"
+Also, starting from `1.18` version, `add-ons` can be managed wether by EKS, or (still) manually. Thus, affects its upgrade steps.
 
 
-eksctl create addon \
-    --name vpc-cni \
-    --version latest \
-    --cluster ${EKS_CLUSTER_NAME} \
-    --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT_NUM}:role/<eksctl-my-cluster-addon-iamserviceaccount-kube-sys-Role1-UK9MQSLXK0MW> \
-    --force
-```
+### 8.1. (Optional) When add-on is managed manually (not by EKS)
 
-#### 8.1.1.2. Not add, but update manually (if you don't want to add it to EKS)
+#### 8.1.1. Update (manual): VPC CNI
+
+[Docs: Manual update of VPC CNI add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#updating-vpc-cni-add-on)
 
 Check current version of the K8S `vpc-cni` add-on.
 ```
@@ -256,12 +238,114 @@ Make sure it's `daemonset` has necessary plugin version:
 kubectl describe daemonset aws-node --namespace kube-system | grep Image | cut -d "/" -f 2
 ```
 
+#### 8.1.2. Update (manual): CoreDNS
 
-#### 8.2. Update: CoreDNS
+[Docs: Manual update of CoreDNS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html#updating-coredns-add-on)
+
+1. Check the current version of your CoreDNS deployment.
+```
+kubectl describe deployment coredns \
+    --namespace kube-system \
+    | grep Image \
+    | cut -d "/" -f 3
+    
+    coredns:v1.6.6-eksbuild.1
+```
+
+2. If your current coredns version is `1.5.0` or later, but earlier than the version listed in the [CoreDNS versions table](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html#coredns-versions), then skip this step. 
+
+If your current version is earlier than `1.5.0`, then you need to modify the ConfigMap for CoreDNS to use the forward plug-in, rather than the proxy plug-in.
+
+Open the configmap with the following command.
+```
+kubectl edit configmap coredns -n kube-system
+```
+Replace proxy in the following line with `forward`. Save the file and exit the editor.
+```
+proxy . /etc/resolv.conf
+```
+
+3. If you originally deployed your cluster on Kubernetes 1.17 or earlier, then you may need to remove a discontinued term from your CoreDNS manifest.
+
+> NOTE: You must complete this before upgrading to CoreDNS version `1.7.0`, but it's recommended that you complete this step even if you're upgrading to an earlier version.
+
+Check to see if your CoreDNS manifest has the line.
+```
+kubectl get configmap coredns -n kube-system -o jsonpath='{$.data.Corefile}' | grep upstream
+```
+
+Edit the configmap with the following command, removing the line in the file that has the word upstream in it. Do not change anything else in the file. Once the line is removed, save the changes.
+```
+kubectl edit configmap coredns -n kube-system -o yaml
+```
+
+4. Retrieve your current coredns image:
+```
+kubectl get deployment coredns --namespace kube-system -o=jsonpath='{$.spec.template.spec.containers[:1].image}'
+
+    602401143452.dkr.ecr.eu-central-1.amazonaws.com/eks/coredns:v1.6.6-eksbuild.1
+```
+
+5. If you're updating to CoreDNS `1.8.3`, you need to add the endpointslices permission to the system:coredns Kubernetes clusterrole.
+```
+kubectl edit clusterrole system:coredns -n kube-system
+
+```
+Add the following line under the existing permissions lines in the file.
+```
+...
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
+  verbs:
+  - list
+  - watch
+...
+```
+
+6. Update CoreDNS by replacing `<602401143452>` (including `<>`) , `<cn-north-1>`, and `<com>` with the values from the output returned in the previous step. 
+Replace `<1.8.3>` with your cluster's `recommended CoreDNS version` or later:
+```
+kubectl set image --namespace kube-system deployment.apps/coredns \
+    coredns=<602401143452>.dkr.ecr.<us-west-2>.amazonaws.<com>/eks/coredns:v<1.8.3>-eksbuild.1
+```
+
+
+#### 8.1.3. Update (manual): kube-proxy
+
+[Docs: Manual update of kube-proxy add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-add-on)
 
 
 
-#### 8.3. Update: kube-proxy
+
+### 8.2. (Optional) When add-on is managed by EKS (or needs to be managed by EKS)
+
+
+#### 8.2.1. Update: Add VPC CNI
+
+[Docs: Add already existing VPC CNI add-on to be managed by EKS](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#adding-vpc-cni-eks-add-on)
+
+> NOTE: **add** - as it was not present in EKS before this version.
+> If you have **not added** the Amazon VPC CNI Amazon EKS add-on, the Amazon VPC CNI add-on is still running on your cluster. 
+> You can still update it manually.
+
+To add the `vpc-cni` Amazon EKS add-on using `eksctl`:
+```
+export AWS_ACCOUNT_NUM="491792459462"
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
+
+
+eksctl create addon \
+    --name vpc-cni \
+    --version latest \
+    --cluster ${EKS_CLUSTER_NAME} \
+    --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT_NUM}:role/<eksctl-my-cluster-addon-iamserviceaccount-kube-sys-Role1-UK9MQSLXK0MW> \
+    --force
+```
+
+
+
 
 
 
