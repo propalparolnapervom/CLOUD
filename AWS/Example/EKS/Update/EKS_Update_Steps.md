@@ -333,6 +333,42 @@ kubectl describe deployment coredns \
 
 [Docs: Manual update of kube-proxy add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-add-on)
 
+> NOTE: Update your cluster and nodes to a new Kubernetes minor version before updating kube-proxy to the same minor version as your updated cluster's minor version
+
+1. Check the current version of your kube-proxy deployment.
+```
+kubectl get daemonset kube-proxy --namespace kube-system -o=jsonpath='{$.spec.template.spec.containers[:1].image}'
+
+602401143452.dkr.ecr.eu-central-1.amazonaws.com/eks/kube-proxy:v1.17.9-eksbuild.1
+```
+
+2. Check necessary `kube-proxy` version [here](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#kube-proxy-versions).
+
+Deploy it:
+```
+export AWS_ACC_4_AWS_IMAGES="602401143452" # usually it stays the same
+export AWS_REGION="eu-central-1"
+export NEW_KUBEPROXY_VERSION="1.18.8-eksbuild.1" # recommended one for current K8S version
+
+kubectl set image daemonset.apps/kube-proxy \
+     -n kube-system \
+     kube-proxy=${AWS_ACC_4_AWS_IMAGES}.dkr.ecr.${AWS_REGION}.amazonaws.com/eks/kube-proxy:v${NEW_KUBEPROXY_VERSION}
+```
+
+Verify the pods are up and running.
+```
+kubectl get pods -n kube-system | grep kube-proxy
+```
+
+Verify that daemonset uses necessary image:
+```
+kubectl get daemonset kube-proxy --namespace kube-system -o=jsonpath='{$.spec.template.spec.containers[:1].image}'
+
+```
+
+
+
+3. Check few optional steps here.
 
 
 
