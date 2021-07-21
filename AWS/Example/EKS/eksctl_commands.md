@@ -7,6 +7,12 @@ It is written in Go, uses CloudFormation, was created by Weaveworks
 
 ## Cluster
 
+### List
+Show list of clusters, available for `eksctl`
+```
+eksctl get clusters
+```
+
 ### Update
 
 Update `K8S` version of your `EKS control plane` on 1 minor version later than it's current version
