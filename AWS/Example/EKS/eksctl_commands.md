@@ -63,3 +63,13 @@ Which `default EKS addons` are available in general for specific Kubernetes vers
 ```
 eksctl utils describe-addon-versions --kubernetes-version 1.18
 ```
+
+### Get
+
+Get current version of the installed EKS add-on.
+```
+export EKS_ADDON_NAME="vpc-cni"  # could be: vpc-cni, kube-proxy, coredns
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
+
+eksctl get addon --name ${EKS_ADDON_NAME} --cluster ${EKS_CLUSTER_NAME}
+```
