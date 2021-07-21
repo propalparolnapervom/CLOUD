@@ -286,7 +286,7 @@ kubectl get deployment coredns --namespace kube-system -o=jsonpath='{$.spec.temp
     602401143452.dkr.ecr.eu-central-1.amazonaws.com/eks/coredns:v1.6.6-eksbuild.1
 ```
 
-5. If you're updating to CoreDNS `1.8.3`, you need to add the endpointslices permission to the system:coredns Kubernetes clusterrole.
+5. If you're updating to CoreDNS `1.8.3`, you need to add the endpointslices permission to the `system:coredns` Kubernetes clusterrole.
 ```
 kubectl edit clusterrole system:coredns -n kube-system
 
@@ -304,12 +304,29 @@ Add the following line under the existing permissions lines in the file.
 ...
 ```
 
-6. Update CoreDNS by replacing `<602401143452>` (including `<>`) , `<cn-north-1>`, and `<com>` with the values from the output returned in the previous step. 
-Replace `<1.8.3>` with your cluster's `recommended CoreDNS version` or later:
+6. Update CoreDNS deployment:
 ```
+export AWS_ACC_4_AWS_IMAGES="602401143452" # usually it stays the same
+export AWS_REGION="eu-central-1"
+export NEW_COREDNS_VERSION="1.7.0" # recommended one for current K8S version
+
 kubectl set image --namespace kube-system deployment.apps/coredns \
-    coredns=<602401143452>.dkr.ecr.<us-west-2>.amazonaws.<com>/eks/coredns:v<1.8.3>-eksbuild.1
+    coredns=${AWS_ACC_4_AWS_IMAGES}.dkr.ecr.${AWS_REGION}.amazonaws.com/eks/coredns:v${NEW_COREDNS_VERSION}-eksbuild.1
 ```
+
+Check that new pods are up and running:
+```
+kubectl get pods -n kube-system | grep -i coredns
+```
+
+Check the deployment has necessary image:
+```
+kubectl describe deployment coredns \
+    --namespace kube-system \
+    | grep Image \
+    | cut -d "/" -f 3
+```
+
 
 
 #### 8.1.3. Update (manual): kube-proxy
