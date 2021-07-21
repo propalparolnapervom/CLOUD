@@ -41,10 +41,11 @@ eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NA
 
 [Docs](https://eksctl.io/usage/addons/)
 
-Starting from `1.18`, EKS contains following 3 default `add-ons`:
+Starting from `1.18`, EKS can manage following K8S `add-ons` (or they can still be manually managed, if upgraded from previous version and decided not to install EKS management on them):
 - kube-proxy
 - aws-node
 - coredns
+
 
 
 ### List
