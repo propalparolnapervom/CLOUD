@@ -153,9 +153,9 @@ Steps might depend on:
 - K8S version you are updating to, 
 - Wherher you added you `K8S add-on` as `EKS add-on` or not (starting from `1.18` EKS can manage it for you, if you add it to EKS).
 
-So see original pag
+So see original page.
 
-### 8.1. (Optional) When updated to: `1.18`
+### 8.1. (Optional) When add-on is managed by EKS (or needs to be managed by EKS)
 
 #### 8.1.1. Update: VPC CNI
 
