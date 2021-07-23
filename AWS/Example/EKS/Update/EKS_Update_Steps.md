@@ -136,7 +136,30 @@ eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NA
 If you deployed the `Kubernetes Cluster Autoscaler` to your cluster before updating the cluster, 
 update the `Cluster Autoscaler` to the latest version that matches the Kubernetes major and minor version that you updated to.
 
-> NOTE: See original page.
+Open the Cluster Autoscaler [releases page](https://github.com/kubernetes/autoscaler/releases) from GitHub in a web browser and find the latest Cluster Autoscaler version that matches the Kubernetes major and minor version of your cluster. 
+
+> Note: For example, if the Kubernetes version of your cluster is `1.21`, find the latest `Cluster Autoscaler` release that begins with `1.21`. Record the semantic version number (`1.21.n`) for that release to use in the next step.
+
+Set the Cluster Autoscaler image tag to the version that you recorded in the previous step with the following command.
+```
+export CLUSTER_AUTOSCALER_VER="1.18.3"  # Use latest for curr K8S release
+
+k describe deployment -n kube-system cluster-autoscaler | grep -i image
+
+kubectl set image deployment cluster-autoscaler \
+  -n kube-system \
+  cluster-autoscaler=k8s.gcr.io/autoscaling/cluster-autoscaler:v${CLUSTER_AUTOSCALER_VER}
+
+kubectl describe deployment -n kube-system cluster-autoscaler | grep -i image
+```
+
+Make sure pod is up and running
+```
+kubectl get pods -n kube-system | grep -i autoscaler
+
+kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
+
+```
 
 
 
