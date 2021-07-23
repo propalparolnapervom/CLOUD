@@ -133,10 +133,64 @@ kubectl patch deployment cluster-autoscaler \
 kubectl get deployment -n kube-system cluster-autoscaler -o yaml | grep "safe-to-evict"
 ```
 
+4. Edit the Cluster Autoscaler deployment with the following command.
+```
+kubectl -n kube-system edit deployment.apps/cluster-autoscaler
+```
+Edit the `cluster-autoscaler` container command to replace `<YOUR CLUSTER NAME>` with the name of your cluster, and add the following options.
 
+- `--balance-similar-node-groups`
 
+- `--skip-nodes-with-system-pods=false`
+  
+```
+    spec:
+      containers:
+      - command:
+        - ./cluster-autoscaler
+        - --v=4
+        - --stderrthreshold=info
+        - --cloud-provider=aws
+        - --skip-nodes-with-local-storage=false
+        - --expander=least-waste
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>
+        - --balance-similar-node-groups
+        - --skip-nodes-with-system-pods=false
+```
 
+Check:
+```
+export EKS_CLUSTER_NAME="my-cluster-eksctl"
 
+kubectl get deployment -n kube-system cluster-autoscaler -o yaml | grep node-group-auto-discovery | grep ${EKS_CLUSTER_NAME}
+kubectl get deployment -n kube-system cluster-autoscaler -o yaml | grep balance-similar-node-groups
+kubectl get deployment -n kube-system cluster-autoscaler -o yaml | grep skip-nodes-with-system-pods=false
+```
+
+5. Open the Cluster Autoscaler [releases page](https://github.com/kubernetes/autoscaler/releases) from GitHub in a web browser and find the latest Cluster Autoscaler version that matches the Kubernetes major and minor version of your cluster. 
+
+> Note: For example, if the Kubernetes version of your cluster is `1.21`, find the latest `Cluster Autoscaler` release that begins with `1.21`. Record the semantic version number (`1.21.n`) for that release to use in the next step.
+
+6. Set the Cluster Autoscaler image tag to the version that you recorded in the previous step with the following command.
+```
+export CLUSTER_AUTOSCALER_VER="1.18.3"  # Use latest for curr K8S release
+
+k describe deployment -n kube-system cluster-autoscaler | grep -i image
+
+kubectl set image deployment cluster-autoscaler \
+  -n kube-system \
+  cluster-autoscaler=k8s.gcr.io/autoscaling/cluster-autoscaler:v${CLUSTER_AUTOSCALER_VER}
+
+kubectl describe deployment -n kube-system cluster-autoscaler | grep -i image
+```
+
+Make sure pod is up and running
+```
+kubectl get pods -n kube-system | grep -i autoscaler
+
+kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
+
+```
 
 
 
