@@ -35,7 +35,7 @@ aws iam list-open-id-connect-providers | grep <OIDC_NUM>
  
 Make sure Node groups of your EKS cluster have following tags.
 ```
-Key	                                               Value
+Key	                                                Value
 k8s.io/cluster-autoscaler/<cluster-name>	        owned
 k8s.io/cluster-autoscaler/enabled	                TRUE
 ```
