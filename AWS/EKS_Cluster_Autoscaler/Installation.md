@@ -34,11 +34,11 @@ aws iam list-open-id-connect-providers | grep <OIDC_NUM>
 ### 2. Node groups with Auto Scaling groups tags 
  
 Make sure Node groups of your EKS cluster have following tags.
- 
+```
 Key	                                              Value
---
 k8s.io/cluster-autoscaler/<cluster-name>	        owned
 k8s.io/cluster-autoscaler/enabled	                TRUE
+```
 
 
 
