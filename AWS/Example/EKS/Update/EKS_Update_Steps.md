@@ -117,9 +117,12 @@ When you start updating Managed node group, EKS automatically completes [followi
 
 To start version update process for specific Managed node group:
 ```
+export AWS_REGION="us-east-1"
 export EKS_CLUSTER_NAME="my-cluster-eksctl"
 export EKS_NODEGROUP_NAME="managed-ng-1"
 export NEW_EKS_VERSION="1.18"
+
+eksctl get nodegroup --cluster=${EKS_CLUSTER_NAME} --output=yaml
 
 eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NAME} --kubernetes-version=${NEW_EKS_VERSION}
 ```
