@@ -35,6 +35,21 @@ eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} -
 
 ## Nodegroup
 
+### List
+
+List Nodegroups in the EKS cluster
+```
+export AWS_REGION="us-east-1"
+export EKS_CLUSTER_NAME="data-dev"
+export EKS_NODEGROUP_NAME="managed-ng-1"
+
+eksctl get nodegroup --cluster=${EKS_CLUSTER_NAME} --region=${AWS_REGION}
+
+eksctl get nodegroup --cluster=<clusterName> --name=${EKS_NODEGROUP_NAME} --region=${AWS_REGION}
+
+eksctl get nodegroup --cluster=${EKS_CLUSTER_NAME} --output=yaml --region=${AWS_REGION}
+```
+
 ### Update
 
 To start version update process for specific Managed node group:
