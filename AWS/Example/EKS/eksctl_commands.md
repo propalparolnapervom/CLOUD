@@ -65,6 +65,12 @@ eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NA
 
 ```
 
+### Check health issues
+```
+# Check health issues for the specific Nodegroup
+eksctl utils nodegroup-health --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NAME} --region ${AWS_REGION}
+```
+
 
 ## Addons
 
