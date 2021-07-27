@@ -92,15 +92,16 @@ eksctl version
 
 Update Kubernetes version of your EKS control plane on 1 minor version later than it's current version
 ```
+export AWS_REGION="us-east-1"
 export EKS_CLUSTER_NAME="my-cluster-eksctl"
 # Could be only next K8S minor version
 export NEW_EKS_VERSION="1.18"
 
 # Dry-run
-eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION}
+eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --region ${AWS_REGION}
 
 # Actual steps
-eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --approve
+eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --region ${AWS_REGION} --approve
 ```
 
 ### 5. Update: Worker Nodes
@@ -122,9 +123,9 @@ export EKS_CLUSTER_NAME="my-cluster-eksctl"
 export EKS_NODEGROUP_NAME="managed-ng-1"
 export NEW_EKS_VERSION="1.18"
 
-eksctl get nodegroup --cluster=${EKS_CLUSTER_NAME} --output=yaml
+eksctl get nodegroup --cluster=${EKS_CLUSTER_NAME} --region ${AWS_REGION} --output=yaml
 
-eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NAME} --kubernetes-version=${NEW_EKS_VERSION}
+eksctl upgrade nodegroup --name=${EKS_NODEGROUP_NAME} --cluster=${EKS_CLUSTER_NAME} --kubernetes-version=${NEW_EKS_VERSION} --region ${AWS_REGION}
 ```
 
 #### 5.2. Worker Nodes: Self-managed node group
@@ -411,6 +412,7 @@ kubectl get daemonset kube-proxy --namespace kube-system -o=jsonpath='{$.spec.te
 
 To add the `vpc-cni` Amazon EKS add-on using `eksctl`:
 ```
+export AWS_REGION="us-east-1"
 export AWS_ACCOUNT_NUM="491792459462"
 export EKS_CLUSTER_NAME="my-cluster-eksctl"
 
@@ -419,6 +421,7 @@ eksctl create addon \
     --name vpc-cni \
     --version latest \
     --cluster ${EKS_CLUSTER_NAME} \
+    --region ${AWS_REGION} \
     --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT_NUM}:role/<eksctl-my-cluster-addon-iamserviceaccount-kube-sys-Role1-UK9MQSLXK0MW> \
     --force
 ```
