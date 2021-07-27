@@ -97,6 +97,9 @@ export EKS_CLUSTER_NAME="my-cluster-eksctl"
 # Could be only next K8S minor version
 export NEW_EKS_VERSION="1.18"
 
+# Make sure the cluster is available for eksctl tool
+eksctl get cluster --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
+
 # Dry-run
 eksctl upgrade cluster --name ${EKS_CLUSTER_NAME} --version=${NEW_EKS_VERSION} --region ${AWS_REGION}
 
