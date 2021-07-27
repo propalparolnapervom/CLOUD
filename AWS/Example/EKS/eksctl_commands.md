@@ -16,6 +16,9 @@ eksctl get clusters --region eu-west-2
 
 export AWS_REGION=eu-west-2
 eksctl get clusters
+
+# Make sure the cluster is available for eksctl tool
+eksctl get cluster --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
 ```
 
 ### Update
