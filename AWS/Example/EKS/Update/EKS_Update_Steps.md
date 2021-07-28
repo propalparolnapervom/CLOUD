@@ -286,7 +286,7 @@ kubectl describe deployment coredns \
 
 2. If your current coredns version is `1.5.0` or later, but earlier than the version listed in the [CoreDNS versions table](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html#coredns-versions), then skip this step. 
 
-If your current version is earlier than `1.5.0`, then you need to modify the ConfigMap for CoreDNS to use the forward plug-in, rather than the proxy plug-in.
+If your current version is earlier than `1.5.0`, then you need to modify the ConfigMap for CoreDNS to use the `forward plug-in`, rather than the `proxy plug-in`.
 
 Open the configmap with the following command.
 ```
