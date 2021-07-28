@@ -210,7 +210,9 @@ amazon-k8s-cni:v1.7.5-eksbuild.1
 > NOTE: You should only update one minor version at a time. 
 > For example, if your current version is `1.6` and you want to update to `1.8`, you should update to `1.7` first, then update to `1.8`.
 
-[Latest VPC-CNI release](https://github.com/aws/amazon-vpc-cni-k8s/releases)
+[VPC-CNI vs K8S mapping recommendation](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html)
+
+[Latest VPC-CNI release available](https://github.com/aws/amazon-vpc-cni-k8s/releases)
 
 **(Optional) If you DO NOT care about custom parameters of VPC CI**
 Download general manifest file.
