@@ -435,6 +435,14 @@ eksctl create addon \
 
 
 
+## Post-installation
+
+### Update kubectl
+Update `kubectl` tool on:
+- local machines of all users;
+- CI/CD pipelines (if needed).
+
+
 ## Test updated K8S cluster
 
 [Docs: How to test K8S cluser with sonobuoy](https://github.com/vmware-tanzu/sonobuoy)
@@ -444,8 +452,32 @@ eksctl create addon \
 
 ### Run Kubernetes E2E Testing Plugin
 
+> NOTE: Its run can take up to 1h 
+
 ```
+export NEW_K8S_VERSION=""
+
 sonobuoy run --plugin e2e --kube-conformance-image-version v1.17.2
+```
+
+Check status of the e2e test run
+
+```
+sonobuoy status
+```
+
+To inspect E2E results
+
+```
+sonobuoy retrieve 
+
+sonobuoy results $archive
+```
+
+Clean up
+
+```
+sonobuoy delete --wait
 ```
 
 ### Run quick test
@@ -473,14 +505,6 @@ Clean up
 ```
 sonobuoy delete --wait
 ```
-
-## Post-installation
-
-### Update kubectl
-Update `kubectl` tool on:
-- local machines of all users;
-- CI/CD pipelines (if needed).
-
 
 
 
