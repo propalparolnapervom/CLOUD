@@ -466,6 +466,11 @@ Check status of the e2e test run
 sonobuoy status
 ```
 
+View test running in the on-line
+```
+sonobuoy logs -f
+```
+
 To inspect E2E results
 
 ```
