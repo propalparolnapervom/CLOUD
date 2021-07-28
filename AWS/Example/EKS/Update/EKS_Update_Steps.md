@@ -435,8 +435,44 @@ eksctl create addon \
 
 
 
+## Test updated K8S cluster
+
+[Docs: How to test K8S cluser with sonobuoy](https://github.com/vmware-tanzu/sonobuoy)
+
+[docs: Install sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation)
 
 
+### Run Kubernetes E2E Testing Plugin
+
+```
+sonobuoy run --plugin e2e --kube-conformance-image-version v1.17.2
+```
+
+### Run quick test
+
+Start quick test
+```
+sonobuoy run --mode quick
+```
+
+Get the results from the plugins (e.g. e2e test results):
+```
+results=$(sonobuoy retrieve)
+```
+
+Inspect results for test failures. This will list the number of tests failed and their names:
+```
+sonobuoy results $results
+```
+
+> Note: The results command has lots of useful options for various situations. 
+> See the [results](https://sonobuoy.io/docs/results) page for more details.
+
+Clean up
+
+```
+sonobuoy delete --wait
+```
 
 ## Post-installation
 
