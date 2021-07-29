@@ -450,14 +450,58 @@ Update `kubectl` tool on:
 [docs: Install sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation)
 
 
+### Run quick test
+
+> NOTE: This mode will run a single test from the e2e test suite which is known to be simple and fast. 
+> So just a quick check that the cluster is responding and reachable.
+
+Start quick test
+```
+sonobuoy run --mode quick
+```
+
+Check status of the e2e test run
+```
+sonobuoy status
+```
+
+View test running in the on-line
+```
+sonobuoy logs -f
+```
+
+Get the results from the plugins (e.g. e2e test results):
+```
+results=$(sonobuoy retrieve)
+```
+
+Inspect results for test failures. This will list the number of tests failed and their names:
+```
+sonobuoy results $results
+```
+
+> Note: The results command has lots of useful options for various situations. 
+> See the [results](https://sonobuoy.io/docs/results) page for more details.
+
+Clean up
+
+```
+sonobuoy delete --wait
+```
+
+
 ### Run Kubernetes E2E Testing Plugin
 
 > NOTE: Its run can take up to 1h 
 
-```
-export NEW_K8S_VERSION=""
+> NOTE: This mode runs all of the Conformance tests and is the mode used when applying for the Certified Kubernetes Conformance Program. 
+> Some of these tests may be disruptive to other workloads so it is not recommended that you run this mode on production clusters.
+> In those situations, use the default “non-disruptive-conformance” mode.
 
-sonobuoy run --plugin e2e --kube-conformance-image-version v1.17.2
+```
+export NEW_K8S_VERSION="1.17.7"
+
+sonobuoy run --plugin e2e --kube-conformance-image-version v${NEW_K8S_VERSION}
 ```
 
 Check status of the e2e test run
@@ -485,31 +529,7 @@ Clean up
 sonobuoy delete --wait
 ```
 
-### Run quick test
 
-Start quick test
-```
-sonobuoy run --mode quick
-```
-
-Get the results from the plugins (e.g. e2e test results):
-```
-results=$(sonobuoy retrieve)
-```
-
-Inspect results for test failures. This will list the number of tests failed and their names:
-```
-sonobuoy results $results
-```
-
-> Note: The results command has lots of useful options for various situations. 
-> See the [results](https://sonobuoy.io/docs/results) page for more details.
-
-Clean up
-
-```
-sonobuoy delete --wait
-```
 
 
 
