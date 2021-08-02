@@ -26,33 +26,6 @@ eksctl get cluster --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
 > NOTE: If some key is not specified, default one is in use
 
 
-Install via command-line 
-```
-export EKS_CLUSTER_NAME="my-cluster-via-eksctl"
-export EKS_VER="1.17"
-export AWS_REGION="eu-central-1"
-export SSH_KEY_4_WORK_NODES="/home/sburtovyi/overall/to_del_dir/k8s_experiments/xbsTestEKSCreationNode.pem"
-export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/${EKS_CLUSTER_NAME}.kubeconfig"
-
-# Dry-run
-eksctl create cluster \
---name ${EKS_CLUSTER_NAME} \
---version ${EKS_VER} \
---region ${AWS_REGION} \
---with-oidc \
---managed \
---dry-run
-
-# Actual steps
-eksctl create cluster \
---name ${EKS_CLUSTER_NAME} \
---version ${EKS_VER} \
---region ${AWS_REGION} \
---with-oidc \
---kubeconfig ${KUBECONFIG} \
---managed
-```
-
 Install via config file
 ```
 # 1. Create a config file eks_cluster.yaml
@@ -90,6 +63,37 @@ iam:
 # 2. Install EKS cluster from the file
 eksctl create cluster -f eks_cluster.yaml
 
+```
+
+Install via command-line 
+
+> NOTE: Currently this example doesn't include definition of:
+> - how to use your private ssh key to connect to the nodes (so you can't);
+> - how to define which EC2 instance type to use for a worker nodes (so a big one created automatically)
+```
+export EKS_CLUSTER_NAME="my-cluster-via-eksctl"
+export EKS_VER="1.17"
+export AWS_REGION="eu-central-1"
+export SSH_KEY_4_WORK_NODES="/home/sburtovyi/overall/to_del_dir/k8s_experiments/xbsTestEKSCreationNode.pem"
+export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/${EKS_CLUSTER_NAME}.kubeconfig"
+
+# Dry-run
+eksctl create cluster \
+--name ${EKS_CLUSTER_NAME} \
+--version ${EKS_VER} \
+--region ${AWS_REGION} \
+--with-oidc \
+--managed \
+--dry-run
+
+# Actual steps
+eksctl create cluster \
+--name ${EKS_CLUSTER_NAME} \
+--version ${EKS_VER} \
+--region ${AWS_REGION} \
+--with-oidc \
+--kubeconfig ${KUBECONFIG} \
+--managed
 ```
 
 
