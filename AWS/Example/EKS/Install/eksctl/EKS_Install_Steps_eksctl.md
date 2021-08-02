@@ -23,37 +23,6 @@ It's about how to create an EKS cluster with 1 command - so it doesn't give an e
 
 > NOTE: If you don't have SSH key created: `aws ec2 create-key-pair --region us-west-2 --key-name myKeyPair`
 
-## Install (command line)
-Set up necessary vars
-```
-export EKS_CLUSTER_NAME="my-cluster-via-eksctl"
-export EKS_VER="1.17"
-export AWS_REGION="eu-central-1"
-export SSH_KEY_4_WORK_NODES="/home/sburtovyi/overall/to_del_dir/k8s_experiments/xbsTestEKSCreationNode.pem"
-export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/${EKS_CLUSTER_NAME}.kubeconfig"
-
-```
-
-Run installation command with necessary keys (if some key is not specified, default one is in use):
-```
-# Dry-run
-eksctl create cluster \
---name ${EKS_CLUSTER_NAME} \
---version ${EKS_VER} \
---region ${AWS_REGION} \
---with-oidc \
---managed \
---dry-run
-
-# Actual steps
-eksctl create cluster \
---name ${EKS_CLUSTER_NAME} \
---version ${EKS_VER} \
---region ${AWS_REGION} \
---with-oidc \
---kubeconfig ${KUBECONFIG} \
---managed
-```
 
 ## Intall (config file)
 
@@ -93,6 +62,44 @@ iam:
 Install EKS cluster from the file
 ```
 eksctl create cluster -f eks_cluster.yaml
+```
+
+## Install (command line)
+
+> NOTE: Currently this example doesn't include definition of:
+> - how to use your private ssh key to connect to the nodes (so you can't);
+> - how to define which EC2 instance type to use for a worker nodes (so a big one created automatically)
+
+
+Set up necessary vars
+```
+export EKS_CLUSTER_NAME="my-cluster-via-eksctl"
+export EKS_VER="1.17"
+export AWS_REGION="eu-central-1"
+export SSH_KEY_4_WORK_NODES="/home/sburtovyi/overall/to_del_dir/k8s_experiments/xbsTestEKSCreationNode.pem"
+export KUBECONFIG="/home/sburtovyi/overall/to_del_dir/k8s_experiments/${EKS_CLUSTER_NAME}.kubeconfig"
+
+```
+
+Run installation command with necessary keys (if some key is not specified, default one is in use):
+```
+# Dry-run
+eksctl create cluster \
+--name ${EKS_CLUSTER_NAME} \
+--version ${EKS_VER} \
+--region ${AWS_REGION} \
+--with-oidc \
+--managed \
+--dry-run
+
+# Actual steps
+eksctl create cluster \
+--name ${EKS_CLUSTER_NAME} \
+--version ${EKS_VER} \
+--region ${AWS_REGION} \
+--with-oidc \
+--kubeconfig ${KUBECONFIG} \
+--managed
 ```
 
 # CONNECT
