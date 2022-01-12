@@ -36,6 +36,21 @@ aws ec2 describe-instances
 aws ec2 terminate-instances --instance-ids i03-002rower235
 ```
 
+**Get list of the latest AMI**
+```
+aws ec2 describe-images \
+    --filters \
+      "Name=virtualization-type,Values=hvm" \
+      "Name=architecture,Values=x86_64" \
+      "Name=name,Values=*ubuntu-trusty-14.04*" \
+      "Name=root-device-type,Values=ebs" \
+      "Name=state,Values=available"  \
+      "Name=block-device-mapping.volume-type,Values=gp2" \
+      "Name=block-device-mapping.delete-on-termination,Values=true" \
+    --output text \
+    --query "reverse(sort_by(Images, &CreationDate))
+             [*].[ImageId, Name, CreationDate]"
+```
 
 
 
